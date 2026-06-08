@@ -253,15 +253,23 @@ Productividad = Cantidad producida / Recursos utilizados
 <span class="formula-title">Consumo diario promedio</span>
 Consumo diario = Consumo mensual / Días hábiles del mes
 
-<span class="formula-title" style="margin-top:14px">Stock mínimo (de seguridad)</span>
+<span class="formula-title" style="margin-top:14px">Stock mínimo (inventario de seguridad)</span>
 Stock mínimo = Consumo diario × Plazo de entrega (días)
 
-<span class="formula-title" style="margin-top:14px">Punto de pedido</span>
-Punto de pedido = Stock mínimo + (Consumo diario × Plazo de entrega)
-ó simplificado: PP = Consumo diario × Plazo de entrega × 2 (con seguridad doble)
+<span class="formula-title" style="margin-top:14px">Punto de pedido (PP)</span>
+PP = Stock mínimo + Consumo diario × Plazo de entrega
+PP = Consumo diario × Plazo de entrega × 2
+
+<span class="formula-title" style="margin-top:14px">Stock máximo</span>
+Stock máximo = Stock mínimo + Lote de compra
 
 <span class="formula-title" style="margin-top:14px">Lote de compra</span>
 Lote = Stock máximo - Stock mínimo
+</div>
+
+<div class="box">
+<span class="label">Cómo leer el punto de pedido</span>
+<p>Cuando el stock baja al nivel del PP se emite la orden de compra. El lote llegará cuando el stock llegue al nivel mínimo (de seguridad). El PP incluye el consumo durante el lead time más el colchón de seguridad.</p>
 </div>
 
 <!-- SVG Gráfico diente de sierra (stock) -->

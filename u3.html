@@ -199,104 +199,26 @@ footer{margin-top:56px;padding-top:20px;border-top:1px solid #e5e5e5;color:#888;
 <h3>Relación lineal (o de línea)</h3>
 <p>Es la relación de autoridad directa entre un superior y sus subordinados. La orden baja en línea recta desde el nivel más alto hasta el más bajo. Es el tipo de relación más simple y define la cadena de mando principal.</p>
 
-<!-- SVG Organigrama Lineal -->
-<svg class="fig" viewBox="0 0 480 200" xmlns="http://www.w3.org/2000/svg" style="max-width:480px;border:1px solid #e5e5e5;background:#fff;padding:12px;border-radius:2px">
-  <title>Organigrama lineal</title>
-  <!-- Nivel 1 -->
-  <rect x="165" y="10" width="150" height="36" rx="2" fill="#1a1a1a"/>
-  <text x="240" y="33" text-anchor="middle" fill="#fff" font-family="system-ui,sans-serif" font-size="12" font-weight="600">Gerencia General</text>
-  <!-- Línea central hacia abajo -->
-  <line x1="240" y1="46" x2="240" y2="76" stroke="#1a1a1a" stroke-width="1.5"/>
-  <!-- Nivel 2 - 3 cajas -->
-  <line x1="80" y1="76" x2="400" y2="76" stroke="#1a1a1a" stroke-width="1.5"/>
-  <line x1="80" y1="76" x2="80" y2="92" stroke="#1a1a1a" stroke-width="1.5"/>
-  <line x1="240" y1="76" x2="240" y2="92" stroke="#1a1a1a" stroke-width="1.5"/>
-  <line x1="400" y1="76" x2="400" y2="92" stroke="#1a1a1a" stroke-width="1.5"/>
-  <rect x="20" y="92" width="120" height="34" rx="2" fill="#333"/>
-  <text x="80" y="114" text-anchor="middle" fill="#fff" font-family="system-ui,sans-serif" font-size="11">Producción</text>
-  <rect x="180" y="92" width="120" height="34" rx="2" fill="#333"/>
-  <text x="240" y="114" text-anchor="middle" fill="#fff" font-family="system-ui,sans-serif" font-size="11">Comercialización</text>
-  <rect x="340" y="92" width="120" height="34" rx="2" fill="#333"/>
-  <text x="400" y="114" text-anchor="middle" fill="#fff" font-family="system-ui,sans-serif" font-size="11">Administración</text>
-  <!-- Nivel 3 debajo de Producción -->
-  <line x1="80" y1="126" x2="80" y2="148" stroke="#666" stroke-width="1.2"/>
-  <line x1="50" y1="148" x2="110" y2="148" stroke="#666" stroke-width="1.2"/>
-  <line x1="50" y1="148" x2="50" y2="160" stroke="#666" stroke-width="1.2"/>
-  <line x1="110" y1="148" x2="110" y2="160" stroke="#666" stroke-width="1.2"/>
-  <rect x="14" y="160" width="72" height="28" rx="2" fill="#888"/>
-  <text x="50" y="179" text-anchor="middle" fill="#fff" font-family="system-ui,sans-serif" font-size="10">Operarios</text>
-  <rect x="74" y="160" width="72" height="28" rx="2" fill="#888"/>
-  <text x="110" y="179" text-anchor="middle" fill="#fff" font-family="system-ui,sans-serif" font-size="10">Mantenimiento</text>
-</svg>
-<p class="fig-cap">Organigrama lineal (vertical): cadena de mando directa de arriba hacia abajo.</p>
+<figure class="img-figura">
+  <img src="img/u3/organigrama-lineal.png" alt="Organigrama lineal: estructura vertical con cadena de mando directa" class="fig">
+  <figcaption class="fig-cap">Organigrama lineal (vertical): cadena de mando directa de arriba hacia abajo.</figcaption>
+</figure>
 
 <h3>Relación funcional</h3>
 <p>Cada especialista o jefe funcional tiene autoridad sobre las personas en su área de especialización, <strong>independientemente del sector al que pertenezcan</strong>. Por ejemplo, el responsable de Calidad puede dar instrucciones a trabajadores de Producción, Depósito y Despacho en todo lo que compete a calidad. Viola la unidad de mando pero aprovecha mejor el conocimiento especializado.</p>
 
-<!-- SVG Organigrama Funcional -->
-<svg class="fig" viewBox="0 0 480 200" xmlns="http://www.w3.org/2000/svg" style="max-width:480px;border:1px solid #e5e5e5;background:#fff;padding:12px;border-radius:2px">
-  <title>Organigrama funcional</title>
-  <rect x="165" y="10" width="150" height="36" rx="2" fill="#1a1a1a"/>
-  <text x="240" y="33" text-anchor="middle" fill="#fff" font-family="system-ui,sans-serif" font-size="12" font-weight="600">Dirección</text>
-  <line x1="240" y1="46" x2="240" y2="76" stroke="#1a1a1a" stroke-width="1.5"/>
-  <line x1="80" y1="76" x2="400" y2="76" stroke="#1a1a1a" stroke-width="1.5"/>
-  <line x1="80" y1="76" x2="80" y2="92" stroke="#1a1a1a" stroke-width="1.5"/>
-  <line x1="240" y1="76" x2="240" y2="92" stroke="#1a1a1a" stroke-width="1.5"/>
-  <line x1="400" y1="76" x2="400" y2="92" stroke="#1a1a1a" stroke-width="1.5"/>
-  <rect x="14" y="92" width="132" height="34" rx="2" fill="#333"/>
-  <text x="80" y="109" text-anchor="middle" fill="#fff" font-family="system-ui,sans-serif" font-size="10">Jefe de Finanzas</text>
-  <text x="80" y="121" text-anchor="middle" fill="#ddd" font-family="system-ui,sans-serif" font-size="9">(autoridad funcional)</text>
-  <rect x="174" y="92" width="132" height="34" rx="2" fill="#333"/>
-  <text x="240" y="109" text-anchor="middle" fill="#fff" font-family="system-ui,sans-serif" font-size="10">Jefe de RRHH</text>
-  <text x="240" y="121" text-anchor="middle" fill="#ddd" font-family="system-ui,sans-serif" font-size="9">(autoridad funcional)</text>
-  <rect x="334" y="92" width="132" height="34" rx="2" fill="#333"/>
-  <text x="400" y="109" text-anchor="middle" fill="#fff" font-family="system-ui,sans-serif" font-size="10">Jefe de Calidad</text>
-  <text x="400" y="121" text-anchor="middle" fill="#ddd" font-family="system-ui,sans-serif" font-size="9">(autoridad funcional)</text>
-  <!-- Flechas funcionales punteadas hacia abajo -->
-  <line x1="80" y1="126" x2="80" y2="158" stroke="#888" stroke-dasharray="4,3" stroke-width="1.5"/>
-  <line x1="240" y1="126" x2="240" y2="158" stroke="#888" stroke-dasharray="4,3" stroke-width="1.5"/>
-  <line x1="400" y1="126" x2="400" y2="158" stroke="#888" stroke-dasharray="4,3" stroke-width="1.5"/>
-  <rect x="20" y="158" width="120" height="28" rx="2" fill="#bbb"/>
-  <text x="80" y="177" text-anchor="middle" fill="#1a1a1a" font-family="system-ui,sans-serif" font-size="10">Empleados</text>
-  <rect x="180" y="158" width="120" height="28" rx="2" fill="#bbb"/>
-  <text x="240" y="177" text-anchor="middle" fill="#1a1a1a" font-family="system-ui,sans-serif" font-size="10">Empleados</text>
-  <rect x="340" y="158" width="120" height="28" rx="2" fill="#bbb"/>
-  <text x="400" y="177" text-anchor="middle" fill="#1a1a1a" font-family="system-ui,sans-serif" font-size="10">Empleados</text>
-</svg>
-<p class="fig-cap">Organigrama funcional: cada jefe especialista tiene autoridad sobre todos en su area de especialidad (lineas punteadas).</p>
+<figure class="img-figura">
+  <img src="img/u3/organigrama-funcional.png" alt="Organigrama funcional: cada jefe especialista tiene autoridad sobre todos en su area de especialidad" class="fig">
+  <figcaption class="fig-cap">Organigrama funcional: cada jefe especialista tiene autoridad sobre todos en su area de especialidad (lineas punteadas).</figcaption>
+</figure>
 
 <h3>Relación staff (o asesoría)</h3>
 <p>El staff es un puesto de <strong>asesoramiento y apoyo</strong> sin autoridad de mando. Aconseja, investiga y recomienda, pero no da órdenes a los demás. Por ejemplo, un asesor legal, un consultor externo o un departamento de I+D. Se representa en el organigrama con una línea lateral (no vertical).</p>
 
-<!-- SVG Organigrama con Staff -->
-<svg class="fig" viewBox="0 0 480 190" xmlns="http://www.w3.org/2000/svg" style="max-width:480px;border:1px solid #e5e5e5;background:#fff;padding:12px;border-radius:2px">
-  <title>Organigrama con staff</title>
-  <rect x="165" y="10" width="150" height="36" rx="2" fill="#1a1a1a"/>
-  <text x="240" y="33" text-anchor="middle" fill="#fff" font-family="system-ui,sans-serif" font-size="12" font-weight="600">Gerencia General</text>
-  <!-- Staff lateral -->
-  <line x1="315" y1="28" x2="360" y2="28" stroke="#888" stroke-dasharray="5,3" stroke-width="1.5"/>
-  <rect x="360" y="14" width="106" height="28" rx="2" fill="#e8e8e8" stroke="#aaa" stroke-width="1"/>
-  <text x="413" y="28" text-anchor="middle" fill="#444" font-family="system-ui,sans-serif" font-size="10" font-weight="600">Asesoría Legal</text>
-  <text x="413" y="38" text-anchor="middle" fill="#888" font-family="system-ui,sans-serif" font-size="9">(staff)</text>
-  <!-- Línea principal hacia abajo -->
-  <line x1="240" y1="46" x2="240" y2="76" stroke="#1a1a1a" stroke-width="1.5"/>
-  <line x1="100" y1="76" x2="380" y2="76" stroke="#1a1a1a" stroke-width="1.5"/>
-  <line x1="100" y1="76" x2="100" y2="92" stroke="#1a1a1a" stroke-width="1.5"/>
-  <line x1="240" y1="76" x2="240" y2="92" stroke="#1a1a1a" stroke-width="1.5"/>
-  <line x1="380" y1="76" x2="380" y2="92" stroke="#1a1a1a" stroke-width="1.5"/>
-  <rect x="34" y="92" width="132" height="34" rx="2" fill="#333"/>
-  <text x="100" y="114" text-anchor="middle" fill="#fff" font-family="system-ui,sans-serif" font-size="11">Producción</text>
-  <rect x="174" y="92" width="132" height="34" rx="2" fill="#333"/>
-  <text x="240" y="114" text-anchor="middle" fill="#fff" font-family="system-ui,sans-serif" font-size="11">Ventas</text>
-  <rect x="314" y="92" width="132" height="34" rx="2" fill="#333"/>
-  <text x="380" y="114" text-anchor="middle" fill="#fff" font-family="system-ui,sans-serif" font-size="11">Finanzas</text>
-  <!-- Leyenda -->
-  <line x1="30" y1="160" x2="70" y2="160" stroke="#1a1a1a" stroke-width="1.5"/>
-  <text x="76" y="164" fill="#555" font-family="system-ui,sans-serif" font-size="10">Autoridad de línea</text>
-  <line x1="200" y1="160" x2="240" y2="160" stroke="#888" stroke-dasharray="5,3" stroke-width="1.5"/>
-  <text x="246" y="164" fill="#555" font-family="system-ui,sans-serif" font-size="10">Relación staff (asesora)</text>
-</svg>
-<p class="fig-cap">Organigrama lineal con staff: la Asesoria Legal aparece en posicion lateral con linea punteada, sin autoridad de mando.</p>
+<figure class="img-figura">
+  <img src="img/u3/organigrama-staff.png" alt="Organigrama lineal con staff: el area de asesoria aparece en posicion lateral con linea punteada, sin autoridad de mando" class="fig">
+  <figcaption class="fig-cap">Organigrama lineal con staff: la Asesoria Legal aparece en posicion lateral con linea punteada, sin autoridad de mando.</figcaption>
+</figure>
 
 <table>
 <tr><th>Tipo de relación</th><th>Autoridad</th><th>Característica clave</th></tr>

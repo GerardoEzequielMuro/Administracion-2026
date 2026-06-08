@@ -242,16 +242,29 @@ CT = CF + (CVu × Q)
 <h3>Fórmulas del Punto de Equilibrio</h3>
 
 <div class="formula-box">
-<span class="formula-title">Margen de Contribución unitario</span>
+<span class="formula-title">Margen de Contribución unitario (Contribución Marginal)</span>
 MC = PVu - CVu
 
-<span class="formula-title" style="margin-top:14px">PE en unidades</span>
-PE(u) = CF / (PVu - CVu)
-PE(u) = CF / MC
+<span class="formula-title" style="margin-top:14px">PE en unidades (Cantidad de Equilibrio)</span>
+Qe = CF / (PVu - CVu)
+Qe = CF / MC
 
-<span class="formula-title" style="margin-top:14px">PE en pesos (ingresos)</span>
-PE($) = PE(u) × PVu
+<span class="formula-title" style="margin-top:14px">PE en pesos — fórmula derivada</span>
+PE($) = Qe × PVu
+
+<span class="formula-title" style="margin-top:14px">PE en pesos — fórmula directa (del apunte)</span>
+PE($) = CF / (1 - CV$ / Ventas Totales$)
 </div>
+
+<figure class="img-figura" style="margin:16px 0;text-align:center">
+  <img src="img/u4/u4_formula_pe_unidades.png" alt="Fórmula PE en unidades: CF dividido (Precio por Unidad menos Costo Variable por Unidad)" style="max-width:440px;width:100%;border:1px solid #e5e5e5;padding:8px;background:#fff;border-radius:2px">
+  <figcaption style="font-size:12.5px;color:#888;margin-top:6px;font-style:italic">Fórmula del PE en unidades según el apunte de cátedra</figcaption>
+</figure>
+
+<figure class="img-figura" style="margin:16px 0;text-align:center">
+  <img src="img/u4/u4_formula_pe_pesos.png" alt="Fórmula PE en pesos: CF dividido (1 menos CV dividido Ventas Totales)" style="max-width:380px;width:100%;border:1px solid #e5e5e5;padding:8px;background:#fff;border-radius:2px">
+  <figcaption style="font-size:12.5px;color:#888;margin-top:6px;font-style:italic">Fórmula del PE en pesos según el apunte de cátedra</figcaption>
+</figure>
 
 <div class="box">
 <span class="label">Interpretación</span>
@@ -295,41 +308,44 @@ PE($) = PE(u) × PVu
 
 <h2 id="tipos-pe">Tipos de Punto de Equilibrio</h2>
 
-<p>El apunte de cátedra distingue tres tipos de PE según qué costos se incluyen:</p>
+<p>El apunte de cátedra distingue tres tipos de PE:</p>
 
 <table>
-<tr><th>Tipo</th><th>Qué incluye en CF</th><th>Cuándo se usa</th></tr>
+<tr><th>Tipo</th><th>Definición del apunte</th><th>Fórmula</th></tr>
 <tr>
-  <td><strong>PE Económico</strong></td>
-  <td>Todos los costos fijos, incluyendo amortizaciones (depreciación de bienes de uso).</td>
-  <td>Para análisis de rentabilidad a largo plazo. Incluye el "desgaste" de la maquinaria aunque no se pague en efectivo.</td>
+  <td><strong>PE Contable</strong></td>
+  <td>El método más utilizado. Muestra cuántas ventas son necesarias para que el <strong>beneficio sea cero</strong>. Incluye todos los costos fijos, incluyendo depreciaciones y amortizaciones.</td>
+  <td>PEC = Gastos fijos / Margen de contribución</td>
 </tr>
 <tr>
   <td><strong>PE Financiero</strong></td>
-  <td>Solo los costos fijos que implican <em>salida de dinero real</em>. Se <em>excluye</em> la amortización.</td>
-  <td>Para analizar si la empresa puede generar caja suficiente para sus obligaciones de pago.</td>
+  <td>También llamado <em>punto de equilibrio de caja</em>. No considera la depreciación ni amortización (gastos que no implican salida de caja). El beneficio objetivo sigue siendo cero, pero sin los gastos no desembolsables.</td>
+  <td>PEF = (Gastos fijos - Gastos no desembolsables) / Margen de contribución</td>
 </tr>
 <tr>
-  <td><strong>PE Operativo</strong></td>
-  <td>Costos fijos operativos (los de la actividad normal, sin cargas financieras ni impuestos).</td>
-  <td>Para medir la eficiencia de la operación pura, sin efectos de financiamiento.</td>
+  <td><strong>PE Económico</strong></td>
+  <td>La empresa determina una <strong>ganancia mínima deseada</strong> (remuneración al capital propio) e incorpora ese objetivo al cálculo. Indica cuánto hay que vender para obtener ese beneficio mínimo.</td>
+  <td>PEE = (Gastos fijos + Beneficio deseado) / Margen de contribución</td>
 </tr>
 </table>
 
 <div class="box">
-<span class="label">Diferencia clave: económico vs. financiero</span>
-<p>PE Financiero &lt; PE Económico, porque el PE financiero excluye la amortización (que es un costo real pero no es una salida de caja en el período). La empresa puede estar por debajo del PE económico pero igual "hacer caja" para pagar sus deudas del mes.</p>
+<span class="label">Diferencia clave entre los tres tipos</span>
+<p><strong>PE Financiero &lt; PE Contable &lt; PE Económico.</strong></p>
+<p>El PE financiero es el más bajo porque excluye la amortización (costo real pero no es salida de caja). El PE económico es el más alto porque exige además una ganancia mínima. El contable es el punto de "ni ganancia ni pérdida" incluyendo todos los costos.</p>
 </div>
 
-<h3>Fórmula con amortización</h3>
+<h3>Fórmulas de los tres tipos</h3>
 <div class="formula-box">
-<span class="formula-title">PE Económico (incluye amortización)</span>
-CF económicos = CF pagados + Amortización anual
-PE ec.(u) = CF económicos / MC
+<span class="formula-title">PE Contable (beneficio = 0, incluye amortización)</span>
+PEC = Gastos fijos totales / MC
 
-<span class="formula-title" style="margin-top:14px">PE Financiero (excluye amortización)</span>
-CF financieros = CF pagados (sin amortización)
-PE fin.(u) = CF financieros / MC
+<span class="formula-title" style="margin-top:14px">PE Financiero (excluye gastos no desembolsables)</span>
+PEF = (Gastos fijos - Gastos no desembolsables) / MC
+Gastos no desembolsables = depreciaciones, amortizaciones
+
+<span class="formula-title" style="margin-top:14px">PE Económico (incluye ganancia mínima deseada)</span>
+PEE = (Gastos fijos + Beneficio deseado) / MC
 </div>
 
 
@@ -395,11 +411,11 @@ PE fin.(u) = CF financieros / MC
 
 <div class="ejercicio">
   <span class="ej-label">Ejercicio 2</span>
-  <h4>CF = $80.000 (incluye amortización de $15.000). PVu = $500. CVu = $300. Calcular PE económico y PE financiero.</h4>
+  <h4>CF totales = $80.000 (incluye amortización de $15.000). PVu = $500. CVu = $300. Calcular PE Contable y PE Financiero.</h4>
   <div class="paso"><strong>MC:</strong> 500 - 300 = <strong>$200</strong></div>
-  <div class="paso"><strong>PE Económico</strong> (incluye amortización):<br>CF económico = $80.000<br>PE ec.(u) = 80.000 / 200 = <strong>400 unidades</strong><br>PE ec.($) = 400 × 500 = <strong>$200.000</strong></div>
-  <div class="paso"><strong>PE Financiero</strong> (excluye amortización):<br>CF financiero = 80.000 - 15.000 = $65.000<br>PE fin.(u) = 65.000 / 200 = <strong>325 unidades</strong><br>PE fin.($) = 325 × 500 = <strong>$162.500</strong></div>
-  <p style="margin-top:10px;font-size:13.5px;color:#555">La empresa puede cubrir sus obligaciones de caja vendiendo 325 unidades. Para ser "rentable" en términos económicos (recuperando también el desgaste de maquinaria) necesita vender 400.</p>
+  <div class="paso"><strong>PE Contable</strong> (beneficio = 0, todos los CF incluida amortización):<br>CF contables = $80.000<br>PEC(u) = 80.000 / 200 = <strong>400 unidades</strong><br>PEC($) = 400 × 500 = <strong>$200.000</strong></div>
+  <div class="paso"><strong>PE Financiero</strong> (excluye gastos no desembolsables = amortización):<br>CF financieros = 80.000 - 15.000 = $65.000<br>PEF(u) = 65.000 / 200 = <strong>325 unidades</strong><br>PEF($) = 325 × 500 = <strong>$162.500</strong></div>
+  <p style="margin-top:10px;font-size:13.5px;color:#555">La empresa puede cubrir sus obligaciones de caja vendiendo 325 unidades (PE Financiero). Para que su resultado contable sea cero (recuperando también el costo de la amortización) necesita vender 400 (PE Contable). PEF &lt; PEC.</p>
 </div>
 
 <div class="ejercicio">
@@ -438,10 +454,10 @@ PE fin.(u) = CF financieros / MC
   <label><input type="radio" name="q3" value="c"> c) IT - CT</label>
 </div>
 
-<p class="quiz-q">4. El PE financiero difiere del PE económico porque:</p>
+<p class="quiz-q">4. El PE económico difiere del PE contable porque:</p>
 <div class="quiz-opts" id="q4">
-  <label><input type="radio" name="q4" value="a"> a) Incluye más productos en el análisis</label>
-  <label><input type="radio" name="q4" value="b"> b) Excluye la amortización de los costos fijos</label>
+  <label><input type="radio" name="q4" value="a"> a) Excluye la amortización del cálculo</label>
+  <label><input type="radio" name="q4" value="b"> b) Incorpora una ganancia mínima deseada al numerador</label>
   <label><input type="radio" name="q4" value="c"> c) Usa el costo variable total en vez del unitario</label>
 </div>
 
@@ -552,7 +568,7 @@ const explU4={
   q1:'El PE es el punto donde IT = CT, es decir, la empresa no gana ni pierde.',
   q2:'MC = 400-250 = $150. PE(u) = 60.000/150 = 400 unidades.',
   q3:'MC unitario = PVu - CVu. Muestra cuánto contribuye cada unidad a cubrir los costos fijos.',
-  q4:'El PE financiero excluye la amortización (que no es salida de caja). Por eso es menor que el PE económico.',
+  q4:'El PE económico incorpora una ganancia mínima deseada: PEE = (CF + Beneficio deseado) / MC. Por eso es el más alto de los tres tipos.',
   q5:'Los costos fijos no varían con la cantidad producida: se pagan igual si se produce 0 o 1.000 unidades.',
   q6:'Ganancia = (700-500) unidades × $200 MC = 200 × 200 = $40.000.'
 };
