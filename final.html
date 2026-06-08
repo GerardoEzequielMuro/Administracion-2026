@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Final Integrador | Administración I UCES 2026</title>
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#1a1a1a">
+<link rel="icon" type="image/svg+xml" href="icon.svg">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Administración">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:80px}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+  background:#fafafa;color:#1a1a1a;line-height:1.7;font-size:16px;
+  -webkit-font-smoothing:antialiased;
+}
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  background:rgba(250,250,250,.92);backdrop-filter:blur(10px);
+  border-bottom:1px solid #e5e5e5;padding:12px 0;
+}
+.nav-inner{
+  max-width:820px;margin:0 auto;padding:0 32px;
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+}
+.nav-title{font-weight:600;font-size:15px;white-space:nowrap}
+.nav-links{display:flex;gap:14px;overflow-x:auto;font-size:12.5px}
+.nav-links a{color:#666;text-decoration:none;white-space:nowrap}
+.nav-links a:hover{color:#1a1a1a}
+.nav-links a.active{color:#c00;font-weight:700}
+
+.container{max-width:820px;margin:0 auto;padding:90px 32px 80px}
+
+h1{font-size:30px;font-weight:700;letter-spacing:-.02em;margin-bottom:6px;line-height:1.2}
+.subtitle{color:#666;font-size:14.5px;margin-bottom:28px}
+
+h2{
+  font-size:22px;font-weight:700;margin:52px 0 14px;line-height:1.3;
+  padding-top:24px;border-top:1px solid #e5e5e5;
+}
+h2:first-of-type{border-top:none;padding-top:0;margin-top:0}
+h3{font-size:16px;font-weight:600;margin:24px 0 8px}
+
+p{margin:8px 0;color:#333}
+strong{color:#1a1a1a;font-weight:600}
+ul,ol{margin:8px 0;padding-left:22px;color:#333}
+li{margin:4px 0}
+
+.box{
+  background:#f5f5f5;padding:14px 18px;margin:14px 0;
+  border-left:2px solid #1a1a1a;border-radius:2px;
+}
+.box p:first-child{margin-top:0}.box p:last-child{margin-bottom:0}
+.box .label{
+  font-size:10.5px;font-weight:600;text-transform:uppercase;
+  letter-spacing:.08em;color:#666;display:block;margin-bottom:4px;
+}
+
+/* Final exam styles */
+.exam-header{
+  background:#1a1a1a;color:#fff;padding:20px 24px;border-radius:3px;margin:20px 0 28px;
+}
+.exam-header h2{color:#fff;border:none;padding:0;margin:0 0 6px;font-size:20px}
+.exam-header p{color:#ccc;margin:0;font-size:13.5px}
+
+.pregunta{
+  background:#fff;border:1px solid #e5e5e5;border-radius:3px;
+  padding:18px 20px;margin:14px 0;
+}
+.pregunta .p-header{
+  display:flex;align-items:flex-start;gap:12px;margin-bottom:12px;
+}
+.p-num{
+  background:#1a1a1a;color:#fff;border-radius:2px;
+  font-size:11px;font-weight:700;padding:3px 8px;white-space:nowrap;flex-shrink:0;margin-top:2px;
+}
+.p-unit{
+  font-size:10.5px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;
+  color:#c00;flex-shrink:0;margin-top:4px;
+}
+.p-text{font-size:14.5px;font-weight:600;color:#1a1a1a;line-height:1.5;flex:1}
+.p-opts label{display:block;margin:5px 0;cursor:pointer;font-size:14px;color:#333;padding:4px 0}
+.p-opts input{margin-right:8px}
+.p-opts label.correct{color:#1a6b1a;font-weight:600}
+.p-opts label.wrong{color:#c00}
+
+.num-input-group{display:flex;gap:10px;align-items:center;margin:10px 0;flex-wrap:wrap}
+.num-input-group label{font-size:13px;color:#555;white-space:nowrap}
+.num-input-group input{
+  width:120px;padding:6px 9px;border:1px solid #ddd;border-radius:2px;
+  font-size:14px;font-family:inherit;background:#fafafa;
+}
+.num-input-group input:focus{outline:none;border-color:#1a1a1a;background:#fff}
+
+.exam-controls{
+  display:flex;align-items:center;justify-content:space-between;
+  margin:28px 0 0;flex-wrap:wrap;gap:14px;
+}
+.exam-btn{
+  padding:11px 28px;background:#1a1a1a;color:#fff;
+  border:none;border-radius:2px;font-size:15px;cursor:pointer;
+  font-family:inherit;font-weight:600;
+}
+.exam-btn:hover{background:#333}
+.exam-btn.secondary{background:#fff;color:#1a1a1a;border:1px solid #ddd}
+.exam-btn.secondary:hover{background:#f5f5f5}
+
+.resultado-panel{
+  background:#f5f5f5;border-radius:3px;padding:22px 24px;margin:24px 0;display:none;
+}
+.resultado-panel.show{display:block}
+.resultado-score{font-size:36px;font-weight:700;color:#1a1a1a;margin-bottom:4px}
+.resultado-subtitulo{color:#666;font-size:14px;margin-bottom:16px}
+.resultado-barra-cont{background:#e5e5e5;height:10px;border-radius:5px;margin:12px 0 20px;overflow:hidden}
+.resultado-barra{height:100%;border-radius:5px;transition:width .5s ease}
+
+.fb-item{
+  padding:10px 12px;margin:6px 0;border-radius:2px;font-size:13.5px;
+}
+.fb-item.ok{background:#eaf4ea;border-left:2px solid #1a6b1a}
+.fb-item.mal{background:#fdf0f0;border-left:2px solid #c00}
+.fb-item .fb-q{font-weight:600;color:#1a1a1a;margin-bottom:3px}
+.fb-item .fb-exp{color:#555;font-size:12.5px}
+.fb-item.ok .fb-q::before{content:"✓ ";}
+.fb-item.mal .fb-q::before{content:"✗ ";}
+
+.tag{display:inline-block;background:#f0f0f0;border-radius:2px;font-size:10.5px;padding:1px 6px;color:#555;font-weight:600;margin-left:4px;vertical-align:middle}
+
+footer{margin-top:56px;padding-top:20px;border-top:1px solid #e5e5e5;color:#888;font-size:12.5px;text-align:center}
+
+@media(max-width:640px){
+  body{font-size:15px}
+  .container{padding:80px 18px 60px}
+  .nav-inner{padding:0 16px;gap:10px}
+  .nav-links{gap:10px;font-size:11.5px}
+  h1{font-size:24px}h2{font-size:18px;margin-top:42px}
+  .p-header{flex-wrap:wrap}
+  .num-input-group{flex-direction:column;align-items:flex-start}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="nav-title">Administración I</div>
+    <div class="nav-links">
+      <a href="index.html">Parcial 1</a>
+      <a href="u3.html">U3</a>
+      <a href="u4.html">U4</a>
+      <a href="u5.html">U5</a>
+      <a href="u6.html">U6</a>
+      <a href="final.html" class="active">Final</a>
+      <a href="mapa-mental.html">Mapa</a>
+      <a href="parciales.html">Simulados</a>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+
+<h1>Final Integrador</h1>
+<p class="subtitle">UCES 2026 · Administración I · U1 a U6</p>
+
+<div class="box">
+<span class="label">Instrucciones</span>
+<p>Este simulacro integra los seis temas del programa. Respondé todas las preguntas y presioná <strong>"Ver resultados"</strong> al final. Las preguntas mezclan teoría y ejercicios numéricos, siguiendo el estilo de los finales reales de la cátedra.</p>
+<p>Puntaje: cada pregunta vale entre 5 y 10 puntos según su complejidad. Total: 100 puntos. Para aprobar: 60 puntos.</p>
+</div>
+
+<div class="exam-header">
+  <h2>Examen Final · Administración I</h2>
+  <p>UCES 2026 · Unidades 1 a 6 · 15 preguntas · 100 puntos</p>
+</div>
+
+<!-- ==================== PREGUNTAS ==================== -->
+
+<!-- P1: U1 - Escuelas -->
+<div class="pregunta" id="p1">
+  <div class="p-header">
+    <span class="p-num">1</span>
+    <span class="p-unit">U1 · 6 pts</span>
+    <span class="p-text">La gerencia de una fábrica analiza los tiempos y movimientos de cada operación para eliminar movimientos innecesarios y establecer métodos estándar de trabajo. ¿De qué escuela de administración es propio este enfoque?</span>
+  </div>
+  <div class="p-opts" id="opts1">
+    <label><input type="radio" name="p1" value="a"> a) Escuela de Relaciones Humanas (Mayo)</label>
+    <label><input type="radio" name="p1" value="b"> b) Escuela Clásica - Taylor (Administración Científica)</label>
+    <label><input type="radio" name="p1" value="c"> c) Escuela Burocrática (Weber)</label>
+    <label><input type="radio" name="p1" value="d"> d) Administración Estratégica</label>
+  </div>
+</div>
+
+<!-- P2: U1 - Ciclo administrativo -->
+<div class="pregunta" id="p2">
+  <div class="p-header">
+    <span class="p-num">2</span>
+    <span class="p-unit">U1 · 6 pts</span>
+    <span class="p-text">¿Cuáles son las cuatro etapas del ciclo administrativo en orden correcto?</span>
+  </div>
+  <div class="p-opts" id="opts2">
+    <label><input type="radio" name="p2" value="a"> a) Organización, planificación, control, dirección</label>
+    <label><input type="radio" name="p2" value="b"> b) Planificación, organización, dirección, control</label>
+    <label><input type="radio" name="p2" value="c"> c) Dirección, control, planificación, organización</label>
+    <label><input type="radio" name="p2" value="d"> d) Control, dirección, organización, planificación</label>
+  </div>
+</div>
+
+<!-- P3: U1 - Maslow/McGregor -->
+<div class="pregunta" id="p3">
+  <div class="p-header">
+    <span class="p-num">3</span>
+    <span class="p-unit">U1 · 6 pts</span>
+    <span class="p-text">Un directivo cree que sus empleados no quieren trabajar, evitan responsabilidades y solo se motivan con el dinero. Según McGregor, este directivo tiene una visión de Teoría:</span>
+  </div>
+  <div class="p-opts" id="opts3">
+    <label><input type="radio" name="p3" value="a"> a) Y</label>
+    <label><input type="radio" name="p3" value="b"> b) X</label>
+    <label><input type="radio" name="p3" value="c"> c) Z</label>
+    <label><input type="radio" name="p3" value="d"> d) De sistemas</label>
+  </div>
+</div>
+
+<!-- P4: U2 - Sistema abierto -->
+<div class="pregunta" id="p4">
+  <div class="p-header">
+    <span class="p-num">4</span>
+    <span class="p-unit">U2 · 6 pts</span>
+    <span class="p-text">La Teoría de Sistemas considera a la organización como un sistema abierto. ¿Cuál de las siguientes opciones describe correctamente por qué es "abierto"?</span>
+  </div>
+  <div class="p-opts" id="opts4">
+    <label><input type="radio" name="p4" value="a"> a) Porque tiene muchos niveles jerárquicos accesibles a cualquier empleado</label>
+    <label><input type="radio" name="p4" value="b"> b) Porque intercambia permanentemente recursos e información con su entorno</label>
+    <label><input type="radio" name="p4" value="c"> c) Porque no tiene estructura formal establecida</label>
+    <label><input type="radio" name="p4" value="d"> d) Porque sus metas cambian según las circunstancias del mercado</label>
+  </div>
+</div>
+
+<!-- P5: U3 - Principios de organización -->
+<div class="pregunta" id="p5">
+  <div class="p-header">
+    <span class="p-num">5</span>
+    <span class="p-unit">U3 · 6 pts</span>
+    <span class="p-text">Un operario recibe instrucciones del jefe de Producción para trabajar más rápido, pero al mismo tiempo el jefe de Calidad le pide que sea más minucioso y lento. ¿Qué principio de organización se está violando?</span>
+  </div>
+  <div class="p-opts" id="opts5">
+    <label><input type="radio" name="p5" value="a"> a) Amplitud de control</label>
+    <label><input type="radio" name="p5" value="b"> b) Delegación de autoridad</label>
+    <label><input type="radio" name="p5" value="c"> c) Unidad de mando</label>
+    <label><input type="radio" name="p5" value="d"> d) Coordinación</label>
+  </div>
+</div>
+
+<!-- P6: U3 - Departamentalización -->
+<div class="pregunta" id="p6">
+  <div class="p-header">
+    <span class="p-num">6</span>
+    <span class="p-unit">U3 · 6 pts</span>
+    <span class="p-text">Una empresa nacional tiene divisiones separadas para "Minoristas", "Mayoristas" y "Gobierno". ¿Qué tipo de departamentalización utiliza?</span>
+  </div>
+  <div class="p-opts" id="opts6">
+    <label><input type="radio" name="p6" value="a"> a) Funcional</label>
+    <label><input type="radio" name="p6" value="b"> b) Geográfica</label>
+    <label><input type="radio" name="p6" value="c"> c) Por cliente</label>
+    <label><input type="radio" name="p6" value="d"> d) Por proceso</label>
+  </div>
+</div>
+
+<!-- P7: U3 - Centralización vs descentralización -->
+<div class="pregunta" id="p7">
+  <div class="p-header">
+    <span class="p-num">7</span>
+    <span class="p-unit">U3 · 6 pts</span>
+    <span class="p-text">Una cadena de supermercados con 80 locales en todo el país le otorga al gerente de cada local la autoridad para decidir precios, stocks y personal. ¿Cómo se caracteriza esta política?</span>
+  </div>
+  <div class="p-opts" id="opts7">
+    <label><input type="radio" name="p7" value="a"> a) Centralización total</label>
+    <label><input type="radio" name="p7" value="b"> b) Descentralización</label>
+    <label><input type="radio" name="p7" value="c"> c) Estructura funcional</label>
+    <label><input type="radio" name="p7" value="d"> d) Unidad de mando</label>
+  </div>
+</div>
+
+<!-- P8: U4 - PE cálculo -->
+<div class="pregunta" id="p8">
+  <div class="p-header">
+    <span class="p-num">8</span>
+    <span class="p-unit">U4 · 8 pts</span>
+    <span class="p-text">Una empresa tiene Costos Fijos = $90.000, Precio de Venta unitario = $600, Costo Variable unitario = $375. ¿Cuál es el Punto de Equilibrio en unidades?</span>
+  </div>
+  <div class="p-opts" id="opts8">
+    <label><input type="radio" name="p8" value="a"> a) 150 unidades</label>
+    <label><input type="radio" name="p8" value="b"> b) 400 unidades</label>
+    <label><input type="radio" name="p8" value="c"> c) 240 unidades</label>
+    <label><input type="radio" name="p8" value="d"> d) 360 unidades</label>
+  </div>
+</div>
+
+<!-- P9: U4 - PE en pesos -->
+<div class="pregunta" id="p9">
+  <div class="p-header">
+    <span class="p-num">9</span>
+    <span class="p-unit">U4 · 8 pts</span>
+    <span class="p-text">Usando los datos de la pregunta anterior (CF=$90.000, PVu=$600, CVu=$375), ¿cuál es el Punto de Equilibrio en pesos (facturación)?</span>
+  </div>
+  <div class="p-opts" id="opts9">
+    <label><input type="radio" name="p9" value="a"> a) $90.000</label>
+    <label><input type="radio" name="p9" value="b"> b) $144.000</label>
+    <label><input type="radio" name="p9" value="c"> c) $240.000</label>
+    <label><input type="radio" name="p9" value="d"> d) $216.000</label>
+  </div>
+</div>
+
+<!-- P10: U4 - PE económico vs financiero -->
+<div class="pregunta" id="p10">
+  <div class="p-header">
+    <span class="p-num">10</span>
+    <span class="p-unit">U4 · 8 pts</span>
+    <span class="p-text">Una empresa tiene CF = $80.000 (incluye $20.000 de amortización), PVu = $500, CVu = $300. ¿Cuántas unidades representa el PE Financiero?</span>
+  </div>
+  <div class="p-opts" id="opts10">
+    <label><input type="radio" name="p10" value="a"> a) 400 unidades</label>
+    <label><input type="radio" name="p10" value="b"> b) 300 unidades</label>
+    <label><input type="radio" name="p10" value="c"> c) 350 unidades</label>
+    <label><input type="radio" name="p10" value="d"> d) 200 unidades</label>
+  </div>
+</div>
+
+<!-- P11: U5 - Tipos de producción -->
+<div class="pregunta" id="p11">
+  <div class="p-header">
+    <span class="p-num">11</span>
+    <span class="p-unit">U5 · 6 pts</span>
+    <span class="p-text">Una constructora que edifica un edificio de departamentos único a pedido de un cliente aplica un tipo de producción:</span>
+  </div>
+  <div class="p-opts" id="opts11">
+    <label><input type="radio" name="p11" value="a"> a) Continua</label>
+    <label><input type="radio" name="p11" value="b"> b) Intermitente por lotes</label>
+    <label><input type="radio" name="p11" value="c"> c) Por proyecto (única)</label>
+    <label><input type="radio" name="p11" value="d"> d) Celular</label>
+  </div>
+</div>
+
+<!-- P12: U5 - Stock mínimo / punto de pedido -->
+<div class="pregunta" id="p12">
+  <div class="p-header">
+    <span class="p-num">12</span>
+    <span class="p-unit">U5 · 8 pts</span>
+    <span class="p-text">Una empresa consume 500 unidades por mes (25 días hábiles). El plazo de entrega del proveedor es 6 días. ¿Cuál es el stock mínimo y el punto de pedido?</span>
+  </div>
+  <div class="p-opts" id="opts12">
+    <label><input type="radio" name="p12" value="a"> a) Stock mínimo: 100 un. / Punto de pedido: 200 un.</label>
+    <label><input type="radio" name="p12" value="b"> b) Stock mínimo: 120 un. / Punto de pedido: 240 un.</label>
+    <label><input type="radio" name="p12" value="c"> c) Stock mínimo: 150 un. / Punto de pedido: 300 un.</label>
+    <label><input type="radio" name="p12" value="d"> d) Stock mínimo: 500 un. / Punto de pedido: 1.000 un.</label>
+  </div>
+</div>
+
+<!-- P13: U6 - Reclutamiento -->
+<div class="pregunta" id="p13">
+  <div class="p-header">
+    <span class="p-num">13</span>
+    <span class="p-unit">U6 · 6 pts</span>
+    <span class="p-text">Una empresa publica una vacante en una bolsa de trabajo externa y recibe currículums de personas que nunca trabajaron allí. ¿Qué tipo de reclutamiento está utilizando?</span>
+  </div>
+  <div class="p-opts" id="opts13">
+    <label><input type="radio" name="p13" value="a"> a) Reclutamiento interno</label>
+    <label><input type="radio" name="p13" value="b"> b) Evaluación de desempeño</label>
+    <label><input type="radio" name="p13" value="c"> c) Reclutamiento externo</label>
+    <label><input type="radio" name="p13" value="d"> d) Selección por concurso interno</label>
+  </div>
+</div>
+
+<!-- P14: U6 - Subsistemas RRHH -->
+<div class="pregunta" id="p14">
+  <div class="p-header">
+    <span class="p-num">14</span>
+    <span class="p-unit">U6 · 6 pts</span>
+    <span class="p-text">¿Cuáles de los siguientes pares de actividades pertenecen al <em>subsistema de desarrollo</em> de RRHH?</span>
+  </div>
+  <div class="p-opts" id="opts14">
+    <label><input type="radio" name="p14" value="a"> a) Reclutamiento y selección</label>
+    <label><input type="radio" name="p14" value="b"> b) Remuneraciones y condiciones de trabajo</label>
+    <label><input type="radio" name="p14" value="c"> c) Capacitación y evaluación de desempeño</label>
+    <label><input type="radio" name="p14" value="d"> d) Stock mínimo y punto de pedido</label>
+  </div>
+</div>
+
+<!-- P15: Integrador U1-U6 -->
+<div class="pregunta" id="p15">
+  <div class="p-header">
+    <span class="p-num">15</span>
+    <span class="p-unit">U1-U6 · 8 pts</span>
+    <span class="p-text">Una empresa manufacturera tiene CF=$200.000 (sin amortización), PVu=$1.000, CVu=$600. El gerente de Producción, que depende directamente del Gerente General, delega parte de sus decisiones operativas a los jefes de sección. La empresa también tiene un Asesor Externo que recomienda mejoras sin dar órdenes. Para cubrir una nueva posición de supervisor, se promovió a un empleado interno con buen desempeño. Identificá: PE en unidades, tipo de relación del asesor externo, tipo de reclutamiento y política de autoridad usada por el gerente de Producción.</span>
+  </div>
+  <div class="p-opts" id="opts15">
+    <label><input type="radio" name="p15" value="a"> a) PE=500u / Relación lineal / Reclutamiento externo / Centralización</label>
+    <label><input type="radio" name="p15" value="b"> b) PE=400u / Relación staff / Reclutamiento externo / Descentralización</label>
+    <label><input type="radio" name="p15" value="c"> c) PE=500u / Relación staff / Reclutamiento interno / Delegación de autoridad</label>
+    <label><input type="radio" name="p15" value="d"> d) PE=200u / Relación funcional / Reclutamiento interno / Descentralización total</label>
+  </div>
+</div>
+
+<!-- CONTROLES -->
+<div class="exam-controls">
+  <button class="exam-btn" onclick="corregirFinal()">Ver resultados</button>
+  <button class="exam-btn secondary" onclick="reiniciarFinal()">Reiniciar</button>
+</div>
+
+<!-- PANEL RESULTADOS -->
+<div class="resultado-panel" id="resultado-panel">
+  <div class="resultado-score" id="res-score"></div>
+  <div class="resultado-subtitulo" id="res-subtitulo"></div>
+  <div class="resultado-barra-cont"><div class="resultado-barra" id="res-barra"></div></div>
+  <div id="res-feedback"></div>
+</div>
+
+
+<footer>
+  Administración I · UCES 2026 · Final Integrador U1-U6
+  <br>
+  <a href="index.html" style="color:#888">Parcial 1</a> ·
+  <a href="u3.html" style="color:#888">U3</a> ·
+  <a href="u4.html" style="color:#888">U4</a> ·
+  <a href="u5.html" style="color:#888">U5</a> ·
+  <a href="u6.html" style="color:#888">U6</a>
+</footer>
+
+</div>
+
+<script>
+const preguntas = [
+  {
+    id:'p1', correcta:'b', pts:6,
+    texto:'P1: Taylor / Escuelas',
+    exp:'Análisis de tiempos y movimientos, métodos estándar: Escuela Clásica - Taylor (Administración Científica). Fayol sistematiza administración; Mayo se enfoca en el grupo y la motivación humana.'
+  },
+  {
+    id:'p2', correcta:'b', pts:6,
+    texto:'P2: Ciclo administrativo',
+    exp:'El ciclo administrativo es: Planificación → Organización → Dirección → Control. Es el orden de Fayol que sigue la cátedra.'
+  },
+  {
+    id:'p3', correcta:'b', pts:6,
+    texto:'P3: Teoría X e Y (McGregor)',
+    exp:'Teoría X: el empleado es perezoso, evita responsabilidades, solo le mueve el dinero. Teoría Y: el empleado quiere trabajar, es creativo y busca responsabilidades.'
+  },
+  {
+    id:'p4', correcta:'b', pts:6,
+    texto:'P4: Sistema abierto',
+    exp:'Un sistema abierto intercambia recursos, información y energía con su entorno. La organización toma insumos del entorno, los transforma y devuelve outputs.'
+  },
+  {
+    id:'p5', correcta:'c', pts:6,
+    texto:'P5: Unidad de mando',
+    exp:'Un subordinado recibe órdenes contradictorias de dos jefes diferentes: se viola la Unidad de Mando. Principio de Fayol: cada persona debe recibir órdenes de un solo superior.'
+  },
+  {
+    id:'p6', correcta:'c', pts:6,
+    texto:'P6: Departamentalización por cliente',
+    exp:'Las divisiones "Minoristas", "Mayoristas" y "Gobierno" agrupan según el tipo de cliente. Eso es departamentalización por cliente.'
+  },
+  {
+    id:'p7', correcta:'b', pts:6,
+    texto:'P7: Descentralización',
+    exp:'Delegar autoridad para decidir precios, stocks y personal a cada gerente local es una política de descentralización: la autoridad se distribuye hacia los niveles inferiores.'
+  },
+  {
+    id:'p8', correcta:'b', pts:8,
+    texto:'P8: PE en unidades',
+    exp:'MC = 600-375 = $225. PE(u) = 90.000/225 = 400 unidades.'
+  },
+  {
+    id:'p9', correcta:'c', pts:8,
+    texto:'P9: PE en pesos',
+    exp:'PE($) = PE(u) × PVu = 400 × 600 = $240.000.'
+  },
+  {
+    id:'p10', correcta:'b', pts:8,
+    texto:'P10: PE Financiero',
+    exp:'PE Financiero excluye amortización. CF financiero = 80.000-20.000 = $60.000. MC = 500-300 = $200. PE fin.(u) = 60.000/200 = 300 unidades.'
+  },
+  {
+    id:'p11', correcta:'c', pts:6,
+    texto:'P11: Producción por proyecto',
+    exp:'Un edificio único a pedido del cliente es producción por proyecto (o única): alta personalización, se produce una unidad compleja.'
+  },
+  {
+    id:'p12', correcta:'b', pts:8,
+    texto:'P12: Stock mínimo y punto de pedido',
+    exp:'Consumo diario = 500/25 = 20 un/día. Stock mínimo = 20×6 = 120 un. Punto de pedido = 120+(20×6) = 240 un.'
+  },
+  {
+    id:'p13', correcta:'c', pts:6,
+    texto:'P13: Reclutamiento externo',
+    exp:'Publicar en bolsa de trabajo externa y recibir CVs de personas ajenas a la empresa: reclutamiento externo.'
+  },
+  {
+    id:'p14', correcta:'c', pts:6,
+    texto:'P14: Subsistema de desarrollo',
+    exp:'Subsistema de desarrollo: capacitación y evaluación de desempeño. Incorporación: reclutamiento+selección. Mantenimiento: remuneraciones+condiciones+motivación.'
+  },
+  {
+    id:'p15', correcta:'c', pts:8,
+    texto:'P15: Integrador',
+    exp:'PE: CF=200.000, MC=1000-600=400. PE=200.000/400=500u. Asesor externo sin mando=staff. Empleado promovido=reclutamiento interno. Gerente delega decisiones operativas=delegación de autoridad.'
+  }
+];
+
+const totalPts = preguntas.reduce((s,p)=>s+p.pts,0); // 100
+
+function corregirFinal(){
+  let obtenidos=0;
+  let html='';
+  preguntas.forEach(p=>{
+    const sel=document.querySelector(`input[name="${p.id}"]:checked`);
+    if(sel && sel.value===p.correcta){
+      obtenidos+=p.pts;
+      html+=`<div class="fb-item ok"><div class="fb-q">${p.texto} <span class="tag">+${p.pts}pts</span></div><div class="fb-exp">${p.exp}</div></div>`;
+    } else {
+      const elegida=sel?sel.value:'sin respuesta';
+      html+=`<div class="fb-item mal"><div class="fb-q">${p.texto} <span class="tag">0pts</span> — elegiste: ${elegida}, correcta: ${p.correcta}</div><div class="fb-exp">${p.exp}</div></div>`;
+    }
+  });
+  const pct=Math.round(obtenidos/totalPts*100);
+  const aprobado=obtenidos>=60;
+  document.getElementById('res-score').textContent=obtenidos+'/'+totalPts+' puntos';
+  document.getElementById('res-subtitulo').textContent=
+    aprobado
+    ? '¡Aprobado! (' + pct + '% de acierto). Buen trabajo.'
+    : 'Desaprobado (' + pct + '% de acierto). Repasá los temas marcados en rojo.';
+  const barra=document.getElementById('res-barra');
+  barra.style.width=pct+'%';
+  barra.style.background=aprobado?'#1a6b1a':'#c00';
+  document.getElementById('res-feedback').innerHTML=html;
+  const panel=document.getElementById('resultado-panel');
+  panel.classList.add('show');
+  panel.scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function reiniciarFinal(){
+  document.querySelectorAll('input[type="radio"]').forEach(r=>{r.checked=false;});
+  document.getElementById('resultado-panel').classList.remove('show');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js');}
+</script>
+</body>
+</html>

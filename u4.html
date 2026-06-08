@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>U4 - Producción y Punto de Equilibrio | Administración I UCES 2026</title>
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#1a1a1a">
+<link rel="icon" type="image/svg+xml" href="icon.svg">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Administración">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:80px}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+  background:#fafafa;color:#1a1a1a;line-height:1.7;font-size:16px;
+  -webkit-font-smoothing:antialiased;
+}
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  background:rgba(250,250,250,.92);backdrop-filter:blur(10px);
+  border-bottom:1px solid #e5e5e5;padding:12px 0;
+}
+.nav-inner{
+  max-width:820px;margin:0 auto;padding:0 32px;
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+}
+.nav-title{font-weight:600;font-size:15px;white-space:nowrap}
+.nav-links{display:flex;gap:14px;overflow-x:auto;font-size:12.5px}
+.nav-links a{color:#666;text-decoration:none;white-space:nowrap}
+.nav-links a:hover{color:#1a1a1a}
+.nav-links a.active{color:#1a1a1a;font-weight:700}
+
+.container{max-width:820px;margin:0 auto;padding:90px 32px 80px}
+
+h1{font-size:30px;font-weight:700;letter-spacing:-.02em;margin-bottom:6px;line-height:1.2}
+.subtitle{color:#666;font-size:14.5px;margin-bottom:28px}
+
+h2{
+  font-size:22px;font-weight:700;margin:52px 0 14px;line-height:1.3;
+  padding-top:24px;border-top:1px solid #e5e5e5;
+}
+h2:first-of-type{border-top:none;padding-top:0;margin-top:0}
+.unit{
+  text-transform:uppercase;font-size:13px;letter-spacing:.12em;
+  color:#888;margin:60px 0 0;border:none;padding:0;font-weight:600;
+}
+h3{font-size:16px;font-weight:600;margin:24px 0 8px}
+
+p{margin:8px 0;color:#333}
+strong{color:#1a1a1a;font-weight:600}
+em{color:#333}
+ul,ol{margin:8px 0;padding-left:22px;color:#333}
+li{margin:4px 0}
+
+.fig{display:block;max-width:100%;height:auto;margin:14px auto}
+.fig-cap{font-size:12.5px;color:#888;text-align:center;margin:-8px 0 14px;font-style:italic}
+
+.box{
+  background:#f5f5f5;padding:14px 18px;margin:14px 0;
+  border-left:2px solid #1a1a1a;border-radius:2px;
+}
+.box p:first-child{margin-top:0}.box p:last-child{margin-bottom:0}
+.box .label{
+  font-size:10.5px;font-weight:600;text-transform:uppercase;
+  letter-spacing:.08em;color:#666;display:block;margin-bottom:4px;
+}
+.formula-box{
+  background:#1a1a1a;color:#fff;padding:16px 20px;margin:16px 0;
+  border-radius:3px;font-family:'Courier New',Courier,monospace;font-size:15px;
+  line-height:2;
+}
+.formula-box .formula-title{
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  font-size:10.5px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;
+  color:#aaa;display:block;margin-bottom:6px;font-style:normal;
+}
+
+table{width:100%;border-collapse:collapse;margin:12px 0;font-size:13.5px;border:1px solid #e5e5e5;background:#fff}
+th{background:#f5f5f5;text-align:left;padding:8px 10px;font-weight:600;font-size:11.5px;text-transform:uppercase;letter-spacing:.05em;border-bottom:1px solid #e5e5e5}
+td{padding:8px 10px;border-bottom:1px solid #f0f0f0;vertical-align:top;color:#333}
+tr:last-child td{border-bottom:none}
+
+/* Calculadora PE */
+.calc-box{
+  background:#fff;border:1px solid #e5e5e5;border-radius:4px;
+  padding:22px 24px;margin:20px 0;
+}
+.calc-box h3{margin-top:0;margin-bottom:16px;font-size:16px}
+.calc-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:18px}
+.calc-field label{display:block;font-size:11.5px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:#666;margin-bottom:5px}
+.calc-field input{
+  width:100%;padding:8px 10px;border:1px solid #ddd;border-radius:2px;
+  font-size:15px;font-family:inherit;background:#fafafa;color:#1a1a1a;
+}
+.calc-field input:focus{outline:none;border-color:#1a1a1a;background:#fff}
+.calc-btn{
+  padding:9px 24px;background:#1a1a1a;color:#fff;
+  border:none;border-radius:2px;font-size:14px;cursor:pointer;
+  font-family:inherit;font-weight:600;
+}
+.calc-btn:hover{background:#333}
+.calc-results{
+  margin-top:18px;background:#f5f5f5;padding:14px 18px;border-radius:2px;
+  display:none;
+}
+.calc-results.show{display:block}
+.calc-result-item{display:flex;justify-content:space-between;align-items:center;padding:5px 0;border-bottom:1px solid #e8e8e8}
+.calc-result-item:last-child{border-bottom:none;font-weight:700;font-size:15px}
+.calc-result-label{font-size:13px;color:#555}
+.calc-result-val{font-size:14px;font-weight:600;color:#1a1a1a}
+.calc-error{color:#c00;font-size:13px;margin-top:8px;display:none}
+
+/* Quiz */
+.quiz-section{background:#f5f5f5;padding:20px 22px;border-radius:4px;margin:28px 0}
+.quiz-section h3{margin-top:0;font-size:15px}
+.quiz-q{margin:16px 0 6px;font-weight:600;font-size:14.5px;color:#1a1a1a}
+.quiz-opts label{display:block;margin:4px 0;cursor:pointer;font-size:14px;color:#333}
+.quiz-opts input{margin-right:7px}
+.quiz-btn{
+  margin-top:16px;padding:8px 22px;background:#1a1a1a;color:#fff;
+  border:none;border-radius:2px;font-size:14px;cursor:pointer;font-family:inherit;
+}
+.quiz-btn:hover{background:#333}
+.quiz-result{margin-top:14px;font-size:14px;font-weight:600;color:#1a1a1a}
+.quiz-feedback{margin:4px 0;font-size:13px;color:#555}
+.quiz-feedback.ok{color:#1a6b1a}
+.quiz-feedback.mal{color:#c00}
+
+.ejercicio{background:#fff;border:1px solid #e5e5e5;padding:18px 20px;margin:18px 0;border-radius:3px}
+.ejercicio .ej-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#888;margin-bottom:8px;display:block}
+.ejercicio h4{font-size:15px;font-weight:700;margin:0 0 10px}
+.paso{background:#f5f5f5;padding:10px 14px;margin:6px 0;border-radius:2px;font-size:14px}
+.paso strong{color:#1a1a1a}
+
+footer{margin-top:56px;padding-top:20px;border-top:1px solid #e5e5e5;color:#888;font-size:12.5px;text-align:center}
+
+@media(max-width:640px){
+  body{font-size:15px}
+  .container{padding:80px 18px 60px}
+  .nav-inner{padding:0 16px;gap:10px}
+  .nav-links{gap:10px;font-size:11.5px}
+  h1{font-size:24px}h2{font-size:18px;margin-top:42px}
+  table{font-size:12.5px}
+  .calc-grid{grid-template-columns:1fr;gap:10px}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="nav-title">Administración I</div>
+    <div class="nav-links">
+      <a href="index.html">Parcial 1</a>
+      <a href="u3.html">U3</a>
+      <a href="u4.html" class="active">U4</a>
+      <a href="u5.html">U5</a>
+      <a href="u6.html">U6</a>
+      <a href="final.html" style="color:#c00;font-weight:700">Final</a>
+      <a href="mapa-mental.html">Mapa</a>
+      <a href="parciales.html">Simulados</a>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+
+<h1>Unidad 4. Función de Producción y Punto de Equilibrio</h1>
+<p class="subtitle">UCES 2026 · Administración I · Segundo Parcial</p>
+
+<div class="box">
+<span class="label">Temas de esta unidad</span>
+<p><strong>Función de producción:</strong> concepto y objetivo. <strong>Costos:</strong> fijos, variables, totales. <strong>Punto de Equilibrio (PE):</strong> concepto, fórmulas, tipos (económico, financiero, operativo). <strong>Margen de contribución.</strong> Representación gráfica del PE. Calculadora interactiva.</p>
+</div>
+
+
+<h2 id="produccion">La función de producción</h2>
+
+<p>La <strong>función de producción</strong> es el conjunto de actividades mediante las cuales la empresa <strong>transforma insumos (entradas) en productos o servicios (salidas)</strong>. Es la función que agrega valor: toma materias primas, trabajo, maquinaria y energía, y los convierte en bienes terminados listos para ser vendidos.</p>
+
+<p>El objetivo de la función de producción es obtener la cantidad y calidad requerida de productos <strong>al menor costo posible y en el tiempo establecido</strong>.</p>
+
+<h3>Elementos del proceso productivo</h3>
+<ul>
+  <li><strong>Entradas (inputs):</strong> materias primas, mano de obra, capital, tecnología, información.</li>
+  <li><strong>Proceso de transformación:</strong> conjunto de operaciones que modifican los inputs.</li>
+  <li><strong>Salidas (outputs):</strong> productos terminados o servicios.</li>
+  <li><strong>Retroalimentación:</strong> control de calidad que ajusta el proceso.</li>
+</ul>
+
+
+<h2 id="costos">Costos: fijos y variables</h2>
+
+<p>Para entender el Punto de Equilibrio primero hay que comprender cómo se clasifican los costos.</p>
+
+<h3>Costos fijos (CF)</h3>
+<p>Son los costos que <strong>no cambian con el nivel de producción</strong>. Se pagan aunque la empresa no produzca nada. Ejemplos: alquiler del local, sueldos del personal administrativo, seguros, amortización de maquinaria.</p>
+
+<h3>Costos variables (CV)</h3>
+<p>Son los costos que <strong>varían en proporción directa con la cantidad producida</strong>. Si se produce más, los costos variables aumentan; si se produce menos, disminuyen. Ejemplos: materia prima, mano de obra directa, energía para producción, comisiones de venta.</p>
+
+<h3>Costo total (CT)</h3>
+<p>Es la suma de costos fijos más costos variables para un nivel de producción dado:</p>
+
+<div class="formula-box">
+<span class="formula-title">Costo Total</span>
+CT = CF + (CVu × Q)
+</div>
+
+<p>Donde <strong>CVu</strong> es el costo variable por unidad y <strong>Q</strong> es la cantidad producida.</p>
+
+<table>
+<tr><th>Tipo de costo</th><th>Comportamiento con la cantidad</th><th>Ejemplos</th></tr>
+<tr><td><strong>Fijo (CF)</strong></td><td>No cambia (linea horizontal)</td><td>Alquiler, sueldos administrativos, seguros</td></tr>
+<tr><td><strong>Variable (CV)</strong></td><td>Aumenta proporcionalmente</td><td>Materia prima, comisiones, energia productiva</td></tr>
+<tr><td><strong>Total (CT)</strong></td><td>Sube a partir del nivel de CF</td><td>CF + CV</td></tr>
+</table>
+
+
+<h2 id="pe">Punto de Equilibrio (PE)</h2>
+
+<p>El <strong>Punto de Equilibrio</strong> es el nivel de producción (o ventas) en que los <strong>ingresos totales son exactamente iguales a los costos totales</strong>. En ese punto la empresa no gana ni pierde: la ganancia es cero.</p>
+
+<ul>
+  <li>Si vende <strong>menos</strong> que el PE: tiene <strong>pérdida</strong>.</li>
+  <li>Si vende <strong>más</strong> que el PE: obtiene <strong>ganancia</strong>.</li>
+</ul>
+
+<h3>Variables del PE</h3>
+<table>
+<tr><th>Variable</th><th>Simbolo</th><th>Qué es</th></tr>
+<tr><td>Costos Fijos</td><td><strong>CF</strong></td><td>Costos que no dependen de la cantidad producida</td></tr>
+<tr><td>Precio de Venta unitario</td><td><strong>PVu</strong></td><td>Lo que cobra la empresa por cada unidad vendida</td></tr>
+<tr><td>Costo Variable unitario</td><td><strong>CVu</strong></td><td>Costo variable por cada unidad producida</td></tr>
+<tr><td>Margen de Contribución</td><td><strong>MC</strong></td><td>PVu - CVu: lo que "aporta" cada unidad para cubrir los CF</td></tr>
+<tr><td>PE en unidades</td><td><strong>PE(u)</strong></td><td>Cantidad a vender para no ganar ni perder</td></tr>
+<tr><td>PE en pesos</td><td><strong>PE($)</strong></td><td>Facturación necesaria para no ganar ni perder</td></tr>
+</table>
+
+<h3>Fórmulas del Punto de Equilibrio</h3>
+
+<div class="formula-box">
+<span class="formula-title">Margen de Contribución unitario</span>
+MC = PVu - CVu
+
+<span class="formula-title" style="margin-top:14px">PE en unidades</span>
+PE(u) = CF / (PVu - CVu)
+PE(u) = CF / MC
+
+<span class="formula-title" style="margin-top:14px">PE en pesos (ingresos)</span>
+PE($) = PE(u) × PVu
+</div>
+
+<div class="box">
+<span class="label">Interpretación</span>
+<p>El <strong>Margen de Contribución (MC)</strong> indica cuánto contribuye cada unidad vendida para recuperar los costos fijos. Una vez cubiertos todos los CF, cada unidad adicional vendida genera ganancia pura.</p>
+<p>Por eso la fórmula del PE en unidades dice: "¿Cuántas veces necesito el MC para cubrir todos los CF?"</p>
+</div>
+
+<!-- SVG Gráfico PE base -->
+<svg id="pe-svg" class="fig" viewBox="0 0 500 320" xmlns="http://www.w3.org/2000/svg" style="max-width:500px;border:1px solid #e5e5e5;background:#fff;padding:16px;border-radius:2px">
+  <title>Grafico Punto de Equilibrio</title>
+  <!-- Ejes -->
+  <line x1="60" y1="270" x2="460" y2="270" stroke="#999" stroke-width="1.5"/>
+  <line x1="60" y1="20" x2="60" y2="270" stroke="#999" stroke-width="1.5"/>
+  <!-- Etiquetas ejes -->
+  <text x="460" y="285" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#666">Cantidad</text>
+  <text x="22" y="150" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#666" transform="rotate(-90,22,150)">$ Costos/Ingresos</text>
+  <!-- Línea CF (horizontal, gris) -->
+  <line x1="60" y1="190" x2="460" y2="190" stroke="#888" stroke-width="1.5" stroke-dasharray="6,4"/>
+  <text x="464" y="194" font-family="system-ui,sans-serif" font-size="11" fill="#888">CF</text>
+  <!-- Línea CT (diagonal desde CF) -->
+  <line x1="60" y1="190" x2="420" y2="80" stroke="#555" stroke-width="2"/>
+  <text x="424" y="82" font-family="system-ui,sans-serif" font-size="11" fill="#555">CT</text>
+  <!-- Línea Ingresos (desde origen) -->
+  <line x1="60" y1="270" x2="420" y2="55" stroke="#1a1a1a" stroke-width="2"/>
+  <text x="424" y="58" font-family="system-ui,sans-serif" font-size="11" fill="#1a1a1a">IT</text>
+  <!-- Punto de equilibrio (intersección aproximada) -->
+  <circle cx="267" cy="162" r="5" fill="#c00"/>
+  <text x="270" y="152" font-family="system-ui,sans-serif" font-size="11" fill="#c00" font-weight="600">PE</text>
+  <!-- Lineas punteadas al PE -->
+  <line x1="267" y1="162" x2="267" y2="270" stroke="#c00" stroke-width="1" stroke-dasharray="3,3"/>
+  <line x1="60" y1="162" x2="267" y2="162" stroke="#c00" stroke-width="1" stroke-dasharray="3,3"/>
+  <!-- Zonas -->
+  <text x="145" y="250" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" fill="#c00">PERDIDA</text>
+  <text x="360" y="220" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" fill="#1a6b1a">GANANCIA</text>
+  <!-- Etiquetas ejes numéricos -->
+  <text x="267" y="283" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" fill="#c00">PE(u)</text>
+  <text x="50" y="166" text-anchor="end" font-family="system-ui,sans-serif" font-size="10" fill="#c00">PE($)</text>
+</svg>
+<p class="fig-cap">Gráfico del Punto de Equilibrio: donde IT (ingresos totales) cruza CT (costos totales) es el PE. A la izquierda hay pérdida; a la derecha, ganancia.</p>
+
+
+<h2 id="tipos-pe">Tipos de Punto de Equilibrio</h2>
+
+<p>El apunte de cátedra distingue tres tipos de PE según qué costos se incluyen:</p>
+
+<table>
+<tr><th>Tipo</th><th>Qué incluye en CF</th><th>Cuándo se usa</th></tr>
+<tr>
+  <td><strong>PE Económico</strong></td>
+  <td>Todos los costos fijos, incluyendo amortizaciones (depreciación de bienes de uso).</td>
+  <td>Para análisis de rentabilidad a largo plazo. Incluye el "desgaste" de la maquinaria aunque no se pague en efectivo.</td>
+</tr>
+<tr>
+  <td><strong>PE Financiero</strong></td>
+  <td>Solo los costos fijos que implican <em>salida de dinero real</em>. Se <em>excluye</em> la amortización.</td>
+  <td>Para analizar si la empresa puede generar caja suficiente para sus obligaciones de pago.</td>
+</tr>
+<tr>
+  <td><strong>PE Operativo</strong></td>
+  <td>Costos fijos operativos (los de la actividad normal, sin cargas financieras ni impuestos).</td>
+  <td>Para medir la eficiencia de la operación pura, sin efectos de financiamiento.</td>
+</tr>
+</table>
+
+<div class="box">
+<span class="label">Diferencia clave: económico vs. financiero</span>
+<p>PE Financiero &lt; PE Económico, porque el PE financiero excluye la amortización (que es un costo real pero no es una salida de caja en el período). La empresa puede estar por debajo del PE económico pero igual "hacer caja" para pagar sus deudas del mes.</p>
+</div>
+
+<h3>Fórmula con amortización</h3>
+<div class="formula-box">
+<span class="formula-title">PE Económico (incluye amortización)</span>
+CF económicos = CF pagados + Amortización anual
+PE ec.(u) = CF económicos / MC
+
+<span class="formula-title" style="margin-top:14px">PE Financiero (excluye amortización)</span>
+CF financieros = CF pagados (sin amortización)
+PE fin.(u) = CF financieros / MC
+</div>
+
+
+<h2 id="calculadora">Calculadora de Punto de Equilibrio</h2>
+
+<div class="calc-box">
+  <h3>Calculadora interactiva PE</h3>
+  <p style="font-size:13.5px;color:#555;margin-bottom:16px">Ingresá los tres valores y calculá el PE en unidades y en pesos.</p>
+  <div class="calc-grid">
+    <div class="calc-field">
+      <label>Costos Fijos (CF)</label>
+      <input type="number" id="cf" placeholder="ej: 50000" min="0" step="any">
+    </div>
+    <div class="calc-field">
+      <label>Precio de Venta unitario (PVu)</label>
+      <input type="number" id="pvu" placeholder="ej: 800" min="0" step="any">
+    </div>
+    <div class="calc-field">
+      <label>Costo Variable unitario (CVu)</label>
+      <input type="number" id="cvu" placeholder="ej: 500" min="0" step="any">
+    </div>
+  </div>
+  <button class="calc-btn" onclick="calcularPE()">Calcular PE</button>
+  <p class="calc-error" id="calc-error">Verificá los valores: el PVu debe ser mayor al CVu y todos deben ser positivos.</p>
+  <div class="calc-results" id="calc-results">
+    <div class="calc-result-item">
+      <span class="calc-result-label">Margen de Contribución (MC = PVu - CVu)</span>
+      <span class="calc-result-val" id="res-mc"></span>
+    </div>
+    <div class="calc-result-item">
+      <span class="calc-result-label">PE en unidades (CF ÷ MC)</span>
+      <span class="calc-result-val" id="res-peu"></span>
+    </div>
+    <div class="calc-result-item">
+      <span class="calc-result-label">PE en pesos (PE(u) × PVu)</span>
+      <span class="calc-result-val" id="res-pep"></span>
+    </div>
+    <div class="calc-result-item">
+      <span class="calc-result-label">Ingresos totales en PE</span>
+      <span class="calc-result-val" id="res-check"></span>
+    </div>
+  </div>
+  <!-- SVG dinámico PE -->
+  <svg id="pe-calc-svg" viewBox="0 0 500 280" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;display:none;margin-top:20px;border:1px solid #e5e5e5;background:#fff;padding:12px;border-radius:2px">
+    <title>Grafico PE calculado</title>
+    <!-- se dibuja con JS -->
+  </svg>
+  <p id="pe-calc-cap" class="fig-cap" style="display:none"></p>
+</div>
+
+
+<h2 id="ejercicios">Ejercicios resueltos</h2>
+
+<div class="ejercicio">
+  <span class="ej-label">Ejercicio 1</span>
+  <h4>Una empresa fabrica sillas. CF = $120.000. PVu = $900. CVu = $600. Calcular el PE.</h4>
+  <div class="paso"><strong>Paso 1 - Margen de contribución:</strong><br>MC = PVu - CVu = 900 - 600 = <strong>$300 por silla</strong></div>
+  <div class="paso"><strong>Paso 2 - PE en unidades:</strong><br>PE(u) = CF / MC = 120.000 / 300 = <strong>400 sillas</strong></div>
+  <div class="paso"><strong>Paso 3 - PE en pesos:</strong><br>PE($) = PE(u) × PVu = 400 × 900 = <strong>$360.000</strong></div>
+  <div class="paso"><strong>Verificación:</strong><br>IT = 400 × 900 = $360.000<br>CT = 120.000 + (600 × 400) = 120.000 + 240.000 = $360.000 ✓<br>IT = CT → ganancia = $0</div>
+  <p style="margin-top:10px;font-size:13.5px;color:#555">La empresa necesita vender al menos 400 sillas para no perder dinero. A partir de la silla 401, cada unidad genera $300 de ganancia.</p>
+</div>
+
+<div class="ejercicio">
+  <span class="ej-label">Ejercicio 2</span>
+  <h4>CF = $80.000 (incluye amortización de $15.000). PVu = $500. CVu = $300. Calcular PE económico y PE financiero.</h4>
+  <div class="paso"><strong>MC:</strong> 500 - 300 = <strong>$200</strong></div>
+  <div class="paso"><strong>PE Económico</strong> (incluye amortización):<br>CF económico = $80.000<br>PE ec.(u) = 80.000 / 200 = <strong>400 unidades</strong><br>PE ec.($) = 400 × 500 = <strong>$200.000</strong></div>
+  <div class="paso"><strong>PE Financiero</strong> (excluye amortización):<br>CF financiero = 80.000 - 15.000 = $65.000<br>PE fin.(u) = 65.000 / 200 = <strong>325 unidades</strong><br>PE fin.($) = 325 × 500 = <strong>$162.500</strong></div>
+  <p style="margin-top:10px;font-size:13.5px;color:#555">La empresa puede cubrir sus obligaciones de caja vendiendo 325 unidades. Para ser "rentable" en términos económicos (recuperando también el desgaste de maquinaria) necesita vender 400.</p>
+</div>
+
+<div class="ejercicio">
+  <span class="ej-label">Ejercicio 3</span>
+  <h4>¿Cuánto gana (o pierde) si vende 600 unidades? Datos: CF = $120.000, PVu = $900, CVu = $600.</h4>
+  <div class="paso"><strong>PE(u) = 400 (del ejercicio 1)</strong></div>
+  <div class="paso"><strong>Unidades sobre el PE:</strong> 600 - 400 = 200 unidades extra</div>
+  <div class="paso"><strong>Ganancia = unidades extra × MC:</strong><br>200 × 300 = <strong>$60.000 de ganancia</strong></div>
+  <div class="paso"><strong>Verificación por IT y CT:</strong><br>IT = 600 × 900 = $540.000<br>CT = 120.000 + (600 × 600) = 120.000 + 360.000 = $480.000<br>Ganancia = 540.000 - 480.000 = <strong>$60.000 ✓</strong></div>
+</div>
+
+
+<h2 id="quiz">Mini-quiz: Unidad 4</h2>
+
+<div class="quiz-section">
+<h3>Pone a prueba lo que aprendiste</h3>
+
+<p class="quiz-q">1. El Punto de Equilibrio es el nivel donde:</p>
+<div class="quiz-opts" id="q1">
+  <label><input type="radio" name="q1" value="a"> a) Los ingresos son el doble de los costos</label>
+  <label><input type="radio" name="q1" value="b"> b) Los ingresos totales son iguales a los costos totales</label>
+  <label><input type="radio" name="q1" value="c"> c) Los costos variables cubren los costos fijos</label>
+</div>
+
+<p class="quiz-q">2. Si CF = $60.000, PVu = $400, CVu = $250. ¿Cuál es el PE en unidades?</p>
+<div class="quiz-opts" id="q2">
+  <label><input type="radio" name="q2" value="a"> a) 150 unidades</label>
+  <label><input type="radio" name="q2" value="b"> b) 400 unidades</label>
+  <label><input type="radio" name="q2" value="c"> c) 240 unidades</label>
+</div>
+
+<p class="quiz-q">3. El Margen de Contribución unitario se calcula como:</p>
+<div class="quiz-opts" id="q3">
+  <label><input type="radio" name="q3" value="a"> a) CF ÷ cantidad vendida</label>
+  <label><input type="radio" name="q3" value="b"> b) PVu - CVu</label>
+  <label><input type="radio" name="q3" value="c"> c) IT - CT</label>
+</div>
+
+<p class="quiz-q">4. El PE financiero difiere del PE económico porque:</p>
+<div class="quiz-opts" id="q4">
+  <label><input type="radio" name="q4" value="a"> a) Incluye más productos en el análisis</label>
+  <label><input type="radio" name="q4" value="b"> b) Excluye la amortización de los costos fijos</label>
+  <label><input type="radio" name="q4" value="c"> c) Usa el costo variable total en vez del unitario</label>
+</div>
+
+<p class="quiz-q">5. Los costos fijos son los que:</p>
+<div class="quiz-opts" id="q5">
+  <label><input type="radio" name="q5" value="a"> a) Aumentan con cada unidad producida</label>
+  <label><input type="radio" name="q5" value="b"> b) No cambian con el nivel de producción</label>
+  <label><input type="radio" name="q5" value="c"> c) Solo existen en empresas industriales</label>
+</div>
+
+<p class="quiz-q">6. Una empresa tiene PE(u) = 500. Si vende 700 unidades con MC = $200, su ganancia es:</p>
+<div class="quiz-opts" id="q6">
+  <label><input type="radio" name="q6" value="a"> a) $140.000</label>
+  <label><input type="radio" name="q6" value="b"> b) $40.000</label>
+  <label><input type="radio" name="q6" value="c"> c) $200 × 500 = $100.000</label>
+</div>
+
+<button class="quiz-btn" onclick="corregirQuizU4()">Ver resultados</button>
+<div class="quiz-result" id="quiz-u4-result"></div>
+</div>
+
+
+<footer>
+  Administración I · UCES 2026 · Segundo Parcial
+  <br>
+  <a href="u3.html" style="color:#888">U3: Estructuras</a> ·
+  <a href="u5.html" style="color:#888">U5: Abastecimiento</a> ·
+  <a href="u6.html" style="color:#888">U6: RRHH</a> ·
+  <a href="final.html" style="color:#888">Final integrador</a>
+</footer>
+
+</div>
+
+<script>
+/* ---- Calculadora PE ---- */
+function fmt(n){return new Intl.NumberFormat('es-AR',{style:'currency',currency:'ARS',maximumFractionDigits:2}).format(n);}
+function fmtU(n){return Math.round(n*100)/100+' unidades';}
+
+function calcularPE(){
+  const cf=parseFloat(document.getElementById('cf').value);
+  const pvu=parseFloat(document.getElementById('pvu').value);
+  const cvu=parseFloat(document.getElementById('cvu').value);
+  const err=document.getElementById('calc-error');
+  const res=document.getElementById('calc-results');
+  err.style.display='none';res.classList.remove('show');
+  if(isNaN(cf)||isNaN(pvu)||isNaN(cvu)||cf<0||pvu<=0||cvu<0||pvu<=cvu){
+    err.style.display='block';return;
+  }
+  const mc=pvu-cvu;
+  const peu=cf/mc;
+  const pep=peu*pvu;
+  document.getElementById('res-mc').textContent=fmt(mc)+' / unidad';
+  document.getElementById('res-peu').textContent=Math.ceil(peu)+' unidades (redondeado hacia arriba: '+fmtU(peu)+')';
+  document.getElementById('res-pep').textContent=fmt(pep);
+  document.getElementById('res-check').textContent=fmt(Math.ceil(peu)*pvu)+' (con PE redondeado)';
+  res.classList.add('show');
+  dibujarGraficoPE(cf,pvu,cvu,mc,peu,pep);
+}
+
+function dibujarGraficoPE(cf,pvu,cvu,mc,peu,pep){
+  const svg=document.getElementById('pe-calc-svg');
+  const cap=document.getElementById('pe-calc-cap');
+  const maxQ=Math.ceil(peu*2);
+  const maxY=Math.max(cf*2, pep*1.3);
+  const W=500,H=280,padL=70,padB=40,padR=40,padT=20;
+  const plotW=W-padL-padR, plotH=H-padT-padB;
+
+  function sx(q){return padL+q/maxQ*plotW;}
+  function sy(y){return padT+plotH-(y/maxY*plotH);}
+
+  let d='';
+  // Ejes
+  d+=`<line x1="${padL}" y1="${padT}" x2="${padL}" y2="${padT+plotH}" stroke="#ccc" stroke-width="1.5"/>`;
+  d+=`<line x1="${padL}" y1="${padT+plotH}" x2="${padL+plotW}" y2="${padT+plotH}" stroke="#ccc" stroke-width="1.5"/>`;
+  // CF horizontal
+  d+=`<line x1="${padL}" y1="${sy(cf)}" x2="${padL+plotW}" y2="${sy(cf)}" stroke="#999" stroke-width="1.5" stroke-dasharray="6,4"/>`;
+  d+=`<text x="${padL+plotW+4}" y="${sy(cf)+4}" font-family="system-ui,sans-serif" font-size="10" fill="#888">CF</text>`;
+  // CT (desde (0,cf) hasta (maxQ, cf+cvu*maxQ))
+  d+=`<line x1="${sx(0)}" y1="${sy(cf)}" x2="${sx(maxQ)}" y2="${sy(cf+cvu*maxQ)}" stroke="#555" stroke-width="2"/>`;
+  d+=`<text x="${sx(maxQ)+4}" y="${sy(cf+cvu*maxQ)}" font-family="system-ui,sans-serif" font-size="10" fill="#555">CT</text>`;
+  // IT (desde 0,0 hasta maxQ, pvu*maxQ)
+  d+=`<line x1="${sx(0)}" y1="${sy(0)}" x2="${sx(maxQ)}" y2="${sy(pvu*maxQ)}" stroke="#1a1a1a" stroke-width="2"/>`;
+  d+=`<text x="${sx(maxQ)+4}" y="${sy(pvu*maxQ)}" font-family="system-ui,sans-serif" font-size="10" fill="#1a1a1a">IT</text>`;
+  // PE point
+  d+=`<circle cx="${sx(peu)}" cy="${sy(pep)}" r="5" fill="#c00"/>`;
+  d+=`<line x1="${sx(peu)}" y1="${sy(pep)}" x2="${sx(peu)}" y2="${sy(0)}" stroke="#c00" stroke-width="1" stroke-dasharray="3,3"/>`;
+  d+=`<line x1="${padL}" y1="${sy(pep)}" x2="${sx(peu)}" y2="${sy(pep)}" stroke="#c00" stroke-width="1" stroke-dasharray="3,3"/>`;
+  // Labels PE
+  const peUlabel=Math.round(peu*10)/10;
+  const pePLabel=Math.round(pep);
+  d+=`<text x="${sx(peu)}" y="${sy(0)+14}" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" fill="#c00">${peUlabel}u</text>`;
+  d+=`<text x="${padL-4}" y="${sy(pep)+4}" text-anchor="end" font-family="system-ui,sans-serif" font-size="10" fill="#c00">$${Math.round(pep/1000)}k</text>`;
+  // Zones
+  d+=`<text x="${sx(peu/2)}" y="${sy(0)-6}" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" fill="#c00">PERDIDA</text>`;
+  d+=`<text x="${sx(peu*1.5)}" y="${sy(0)-6}" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" fill="#1a6b1a">GANANCIA</text>`;
+  // Axis labels
+  d+=`<text x="${padL+plotW/2}" y="${H-4}" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" fill="#666">Cantidad producida/vendida</text>`;
+
+  svg.innerHTML=d;
+  svg.style.display='block';
+  cap.style.display='block';
+  cap.textContent=`PE calculado: ${Math.ceil(peu)} unidades / ${fmt(pep)}. CF=${fmt(cf)}, PVu=${fmt(pvu)}, CVu=${fmt(cvu)}, MC=${fmt(mc)}.`;
+}
+
+/* ---- Quiz U4 ---- */
+const corrU4={q1:'b',q2:'b',q3:'b',q4:'b',q5:'b',q6:'b'};
+const explU4={
+  q1:'El PE es el punto donde IT = CT, es decir, la empresa no gana ni pierde.',
+  q2:'MC = 400-250 = $150. PE(u) = 60.000/150 = 400 unidades.',
+  q3:'MC unitario = PVu - CVu. Muestra cuánto contribuye cada unidad a cubrir los costos fijos.',
+  q4:'El PE financiero excluye la amortización (que no es salida de caja). Por eso es menor que el PE económico.',
+  q5:'Los costos fijos no varían con la cantidad producida: se pagan igual si se produce 0 o 1.000 unidades.',
+  q6:'Ganancia = (700-500) unidades × $200 MC = 200 × 200 = $40.000.'
+};
+function corregirQuizU4(){
+  let ok=0,total=Object.keys(corrU4).length,html='';
+  for(const [q,c] of Object.entries(corrU4)){
+    const sel=document.querySelector(`input[name="${q}"]:checked`);
+    if(!sel){html+=`<p class="quiz-feedback mal">Pregunta ${q.slice(1)}: sin respuesta. Correcta: ${c.toUpperCase()}. ${explU4[q]}</p>`;continue;}
+    if(sel.value===c){ok++;html+=`<p class="quiz-feedback ok">Pregunta ${q.slice(1)}: correcto.</p>`;}
+    else{html+=`<p class="quiz-feedback mal">Pregunta ${q.slice(1)}: incorrecto (elegiste ${sel.value.toUpperCase()}, correcta: ${c.toUpperCase()}). ${explU4[q]}</p>`;}
+  }
+  document.getElementById('quiz-u4-result').innerHTML=`<p style="margin-bottom:8px">Resultado: ${ok}/${total} correctas.</p>${html}`;
+}
+if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js');}
+</script>
+</body>
+</html>

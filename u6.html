@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>U6 - Función Personal / RRHH | Administración I UCES 2026</title>
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#1a1a1a">
+<link rel="icon" type="image/svg+xml" href="icon.svg">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Administración">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:80px}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+  background:#fafafa;color:#1a1a1a;line-height:1.7;font-size:16px;
+  -webkit-font-smoothing:antialiased;
+}
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  background:rgba(250,250,250,.92);backdrop-filter:blur(10px);
+  border-bottom:1px solid #e5e5e5;padding:12px 0;
+}
+.nav-inner{
+  max-width:820px;margin:0 auto;padding:0 32px;
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+}
+.nav-title{font-weight:600;font-size:15px;white-space:nowrap}
+.nav-links{display:flex;gap:14px;overflow-x:auto;font-size:12.5px}
+.nav-links a{color:#666;text-decoration:none;white-space:nowrap}
+.nav-links a:hover{color:#1a1a1a}
+.nav-links a.active{color:#1a1a1a;font-weight:700}
+
+.container{max-width:820px;margin:0 auto;padding:90px 32px 80px}
+
+h1{font-size:30px;font-weight:700;letter-spacing:-.02em;margin-bottom:6px;line-height:1.2}
+.subtitle{color:#666;font-size:14.5px;margin-bottom:28px}
+
+h2{
+  font-size:22px;font-weight:700;margin:52px 0 14px;line-height:1.3;
+  padding-top:24px;border-top:1px solid #e5e5e5;
+}
+h2:first-of-type{border-top:none;padding-top:0;margin-top:0}
+.unit{
+  text-transform:uppercase;font-size:13px;letter-spacing:.12em;
+  color:#888;margin:60px 0 0;border:none;padding:0;font-weight:600;
+}
+h3{font-size:16px;font-weight:600;margin:24px 0 8px}
+
+p{margin:8px 0;color:#333}
+strong{color:#1a1a1a;font-weight:600}
+em{color:#333}
+ul,ol{margin:8px 0;padding-left:22px;color:#333}
+li{margin:4px 0}
+
+.fig{display:block;max-width:100%;height:auto;margin:14px auto}
+.fig-cap{font-size:12.5px;color:#888;text-align:center;margin:-8px 0 14px;font-style:italic}
+
+.box{
+  background:#f5f5f5;padding:14px 18px;margin:14px 0;
+  border-left:2px solid #1a1a1a;border-radius:2px;
+}
+.box p:first-child{margin-top:0}.box p:last-child{margin-bottom:0}
+.box .label{
+  font-size:10.5px;font-weight:600;text-transform:uppercase;
+  letter-spacing:.08em;color:#666;display:block;margin-bottom:4px;
+}
+
+table{width:100%;border-collapse:collapse;margin:12px 0;font-size:13.5px;border:1px solid #e5e5e5;background:#fff}
+th{background:#f5f5f5;text-align:left;padding:8px 10px;font-weight:600;font-size:11.5px;text-transform:uppercase;letter-spacing:.05em;border-bottom:1px solid #e5e5e5}
+td{padding:8px 10px;border-bottom:1px solid #f0f0f0;vertical-align:top;color:#333}
+tr:last-child td{border-bottom:none}
+
+.quiz-section{background:#f5f5f5;padding:20px 22px;border-radius:4px;margin:28px 0}
+.quiz-section h3{margin-top:0;font-size:15px}
+.quiz-q{margin:16px 0 6px;font-weight:600;font-size:14.5px;color:#1a1a1a}
+.quiz-opts label{display:block;margin:4px 0;cursor:pointer;font-size:14px;color:#333}
+.quiz-opts input{margin-right:7px}
+.quiz-btn{
+  margin-top:16px;padding:8px 22px;background:#1a1a1a;color:#fff;
+  border:none;border-radius:2px;font-size:14px;cursor:pointer;font-family:inherit;
+}
+.quiz-btn:hover{background:#333}
+.quiz-result{margin-top:14px;font-size:14px;font-weight:600;color:#1a1a1a}
+.quiz-feedback{margin:4px 0;font-size:13px;color:#555}
+.quiz-feedback.ok{color:#1a6b1a}
+.quiz-feedback.mal{color:#c00}
+
+footer{margin-top:56px;padding-top:20px;border-top:1px solid #e5e5e5;color:#888;font-size:12.5px;text-align:center}
+
+@media(max-width:640px){
+  body{font-size:15px}
+  .container{padding:80px 18px 60px}
+  .nav-inner{padding:0 16px;gap:10px}
+  .nav-links{gap:10px;font-size:11.5px}
+  h1{font-size:24px}h2{font-size:18px;margin-top:42px}
+  table{font-size:12.5px}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="nav-title">Administración I</div>
+    <div class="nav-links">
+      <a href="index.html">Parcial 1</a>
+      <a href="u3.html">U3</a>
+      <a href="u4.html">U4</a>
+      <a href="u5.html">U5</a>
+      <a href="u6.html" class="active">U6</a>
+      <a href="final.html" style="color:#c00;font-weight:700">Final</a>
+      <a href="mapa-mental.html">Mapa</a>
+      <a href="parciales.html">Simulados</a>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+
+<h1>Unidad 6. Función Personal (RRHH)</h1>
+<p class="subtitle">UCES 2026 · Administración I · Segundo Parcial</p>
+
+<div class="box">
+<span class="label">Temas de esta unidad</span>
+<p><strong>Función de Personal:</strong> concepto y objetivos. <strong>Descripción y análisis de puestos.</strong> <strong>Subsistema de incorporación:</strong> reclutamiento (interno y externo) y selección. <strong>Subsistema de desarrollo:</strong> capacitación y evaluación de desempeño. <strong>Subsistema de mantenimiento:</strong> remuneraciones, condiciones laborales y motivación.</p>
+</div>
+
+
+<h2 id="concepto">La función de Personal</h2>
+
+<p>La <strong>función de Personal</strong> (o Recursos Humanos) es el conjunto de actividades orientadas a <strong>obtener, mantener y desarrollar el capital humano</strong> que la organización necesita para alcanzar sus objetivos.</p>
+
+<p>Sus objetivos principales son:</p>
+<ul>
+  <li>Incorporar a las personas adecuadas para cada puesto.</li>
+  <li>Desarrollar las capacidades del personal existente.</li>
+  <li>Mantener un clima laboral que favorezca la motivación y la retención del talento.</li>
+  <li>Garantizar el cumplimiento de la legislación laboral.</li>
+</ul>
+
+<!-- SVG Pirámide de subsistemas RRHH -->
+<svg class="fig" viewBox="0 0 480 240" xmlns="http://www.w3.org/2000/svg" style="max-width:480px;border:1px solid #e5e5e5;background:#fff;padding:14px;border-radius:2px">
+  <title>Subsistemas de RRHH: incorporación, desarrollo, mantenimiento</title>
+  <!-- Titulo -->
+  <text x="240" y="18" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12" font-weight="600" fill="#1a1a1a">Subsistemas de la Función de Personal</text>
+  <!-- Círculo central -->
+  <circle cx="240" cy="130" r="38" fill="#1a1a1a"/>
+  <text x="240" y="126" text-anchor="middle" fill="#fff" font-family="system-ui,sans-serif" font-size="11" font-weight="700">FUNCIÓN</text>
+  <text x="240" y="140" text-anchor="middle" fill="#fff" font-family="system-ui,sans-serif" font-size="11" font-weight="700">PERSONAL</text>
+  <!-- Subsistema Incorporación -->
+  <rect x="20" y="40" width="140" height="56" rx="3" fill="#333"/>
+  <text x="90" y="62" text-anchor="middle" fill="#fff" font-family="system-ui,sans-serif" font-size="11" font-weight="700">INCORPORACIÓN</text>
+  <text x="90" y="76" text-anchor="middle" fill="#ccc" font-family="system-ui,sans-serif" font-size="9">Reclutamiento</text>
+  <text x="90" y="87" text-anchor="middle" fill="#ccc" font-family="system-ui,sans-serif" font-size="9">Selección</text>
+  <!-- Flecha -->
+  <line x1="160" y1="68" x2="198" y2="110" stroke="#555" stroke-width="1.5"/>
+  <polygon points="198,110 191,102 202,103" fill="#555"/>
+  <!-- Subsistema Desarrollo -->
+  <rect x="320" y="40" width="140" height="56" rx="3" fill="#555"/>
+  <text x="390" y="62" text-anchor="middle" fill="#fff" font-family="system-ui,sans-serif" font-size="11" font-weight="700">DESARROLLO</text>
+  <text x="390" y="76" text-anchor="middle" fill="#ccc" font-family="system-ui,sans-serif" font-size="9">Capacitación</text>
+  <text x="390" y="87" text-anchor="middle" fill="#ccc" font-family="system-ui,sans-serif" font-size="9">Evaluación de desempeño</text>
+  <!-- Flecha -->
+  <line x1="320" y1="68" x2="282" y2="110" stroke="#555" stroke-width="1.5"/>
+  <polygon points="282,110 278,101 289,105" fill="#555"/>
+  <!-- Subsistema Mantenimiento -->
+  <rect x="140" y="192" width="200" height="40" rx="3" fill="#888"/>
+  <text x="240" y="211" text-anchor="middle" fill="#fff" font-family="system-ui,sans-serif" font-size="11" font-weight="700">MANTENIMIENTO</text>
+  <text x="240" y="224" text-anchor="middle" fill="#eee" font-family="system-ui,sans-serif" font-size="9">Remuneraciones · Condiciones · Motivación</text>
+  <!-- Flecha -->
+  <line x1="240" y1="168" x2="240" y2="190" stroke="#555" stroke-width="1.5"/>
+  <polygon points="240,192 236,184 244,184" fill="#555"/>
+</svg>
+<p class="fig-cap">Los tres subsistemas de la Función de Personal y sus actividades principales.</p>
+
+
+<h2 id="puestos">Descripción y análisis de puestos</h2>
+
+<p>Antes de incorporar a alguien, la empresa necesita saber exactamente qué trabajo debe hacer esa persona. Esto se logra mediante la <strong>descripción y análisis de puestos</strong>.</p>
+
+<h3>Descripción de puestos</h3>
+<p>Es un documento escrito que detalla:</p>
+<ul>
+  <li><strong>Nombre del puesto</strong> y ubicación en el organigrama.</li>
+  <li><strong>Misión del puesto:</strong> para qué existe, su propósito.</li>
+  <li><strong>Tareas y responsabilidades:</strong> qué hace exactamente la persona que ocupa ese puesto.</li>
+  <li><strong>Relaciones:</strong> de quién depende y a quién supervisa.</li>
+  <li><strong>Condiciones de trabajo:</strong> horario, lugar, herramientas.</li>
+</ul>
+
+<h3>Análisis de puestos (perfil)</h3>
+<p>Complementa la descripción indicando los <strong>requisitos</strong> que debe cumplir la persona para ocupar ese puesto:</p>
+<ul>
+  <li>Educación y formación mínima requerida.</li>
+  <li>Experiencia previa.</li>
+  <li>Competencias, habilidades y aptitudes.</li>
+  <li>Características personales (trabajo en equipo, liderazgo, etc.).</li>
+</ul>
+
+<div class="box">
+<span class="label">Por qué es importante</span>
+<p>Sin una descripción de puesto clara, el reclutamiento y la selección son ineficientes: no se sabe qué buscar. También es la base para evaluar el desempeño y definir los rangos salariales.</p>
+</div>
+
+
+<h2 id="incorporacion">Subsistema de incorporación</h2>
+
+<p>El subsistema de incorporación tiene dos etapas: <strong>reclutamiento</strong> y <strong>selección</strong>.</p>
+
+<h3>Reclutamiento</h3>
+
+<p>El <strong>reclutamiento</strong> es el proceso de <strong>atraer candidatos</strong> que puedan cubrir una vacante. El objetivo es generar un conjunto de postulantes entre los cuales elegir al más adecuado.</p>
+
+<table>
+<tr><th>Tipo</th><th>Descripción</th><th>Ventajas</th><th>Desventajas</th></tr>
+<tr>
+  <td><strong>Interno</strong></td>
+  <td>Se busca el candidato dentro de la propia organización (promociones, transferencias, concursos internos).</td>
+  <td>Motiva al personal. El candidato ya conoce la empresa. Menor costo y tiempo de adaptación.</td>
+  <td>Puede generar conflictos entre quienes no son elegidos. No aporta "sangre nueva".</td>
+</tr>
+<tr>
+  <td><strong>Externo</strong></td>
+  <td>Se busca en el mercado laboral: avisos, portales de empleo, agencias, universidades.</td>
+  <td>Nuevas ideas, experiencias y perspectivas. Amplía la base de candidatos.</td>
+  <td>Mayor costo y tiempo. El nuevo empleado tarda más en adaptarse.</td>
+</tr>
+<tr>
+  <td><strong>Mixto</strong></td>
+  <td>Combina reclutamiento interno y externo.</td>
+  <td>Aprovecha las ventajas de ambas fuentes.</td>
+  <td>Proceso más complejo de gestionar.</td>
+</tr>
+</table>
+
+<h3>Selección</h3>
+
+<p>La <strong>selección</strong> es el proceso de <strong>elegir al candidato más apto</strong> entre los reclutados. Se comparan los perfiles de los postulantes con los requisitos del puesto.</p>
+
+<p>Las etapas típicas de un proceso de selección son:</p>
+<ol>
+  <li><strong>Análisis de CVs:</strong> preselección de los candidatos que cumplen los requisitos básicos.</li>
+  <li><strong>Entrevista inicial:</strong> exploración general del candidato.</li>
+  <li><strong>Pruebas y tests:</strong> técnicos, psicotécnicos, de idiomas, según el puesto.</li>
+  <li><strong>Entrevista en profundidad:</strong> con el área solicitante y/o RRHH.</li>
+  <li><strong>Verificación de referencias laborales.</strong></li>
+  <li><strong>Decisión y oferta.</strong></li>
+</ol>
+
+<div class="box">
+<span class="label">Clave del examen</span>
+<p>El reclutamiento <em>atrae candidatos</em>; la selección <em>elige entre ellos</em>. Son dos procesos distintos y consecutivos.</p>
+</div>
+
+
+<h2 id="desarrollo">Subsistema de desarrollo</h2>
+
+<h3>Capacitación</h3>
+
+<p>La <strong>capacitación</strong> es el proceso de <strong>transmitir conocimientos, habilidades y actitudes</strong> a los empleados para mejorar su desempeño actual o prepararlos para futuras responsabilidades.</p>
+
+<p>Se distingue del entrenamiento en que la capacitación apunta al desarrollo integral de la persona, mientras que el entrenamiento es más específico a una tarea.</p>
+
+<p><strong>Etapas del proceso de capacitación:</strong></p>
+<ol>
+  <li>Detectar las necesidades de capacitación (DNC).</li>
+  <li>Diseñar el programa (objetivos, contenidos, metodología, duración).</li>
+  <li>Ejecutar la capacitación.</li>
+  <li>Evaluar los resultados.</li>
+</ol>
+
+<h3>Evaluación de desempeño</h3>
+
+<p>La <strong>evaluación de desempeño</strong> es el proceso sistemático de <strong>medir el rendimiento de cada empleado</strong> respecto a los objetivos y estándares de su puesto. No es un juicio, sino una herramienta de gestión.</p>
+
+<p><strong>Para qué sirve:</strong></p>
+<ul>
+  <li>Identificar fortalezas y áreas de mejora.</li>
+  <li>Tomar decisiones sobre promociones, capacitaciones, aumentos salariales.</li>
+  <li>Dar retroalimentación a los empleados sobre su trabajo.</li>
+  <li>Detectar necesidades de capacitación.</li>
+</ul>
+
+<p><strong>Métodos de evaluación más comunes:</strong></p>
+<ul>
+  <li>Escalas gráficas (se califican atributos de 1 a 5).</li>
+  <li>Evaluación por objetivos (MBO): se compara lo logrado vs. lo planificado.</li>
+  <li>Evaluación 360°: opinan el jefe, los pares, los subordinados y el propio empleado.</li>
+</ul>
+
+
+<h2 id="mantenimiento">Subsistema de mantenimiento</h2>
+
+<p>El subsistema de mantenimiento busca <strong>retener al personal y mantener su motivación y condiciones de trabajo</strong>.</p>
+
+<h3>Remuneraciones</h3>
+
+<p>La <strong>remuneración</strong> es la compensación total que recibe el empleado a cambio de su trabajo. Puede ser:</p>
+
+<table>
+<tr><th>Componente</th><th>Descripción</th></tr>
+<tr><td><strong>Sueldo básico</strong></td><td>Monto fijo mensual establecido en el contrato o convenio colectivo.</td></tr>
+<tr><td><strong>Beneficios sociales</strong></td><td>Obra social, aportes jubilatorios, asignaciones familiares, vacaciones pagas.</td></tr>
+<tr><td><strong>Remuneración variable</strong></td><td>Comisiones, bonos por resultados, participación en ganancias.</td></tr>
+<tr><td><strong>Beneficios no monetarios</strong></td><td>Auto de empresa, tickets de almuerzo, capacitación pagada, horario flexible.</td></tr>
+</table>
+
+<h3>Condiciones de trabajo</h3>
+<p>Incluyen el ambiente físico (iluminación, temperatura, ruido), la seguridad e higiene, la ergonomía de los puestos y los horarios. Condiciones adecuadas reducen accidentes y ausentismo.</p>
+
+<h3>Motivación</h3>
+<p>La motivación del personal tiene una fuerte conexión con las teorías vistas en Unidad 1 (Maslow, McGregor). Un empleado motivado produce más y mejor, comete menos errores y tiene menor intención de abandonar la empresa. Las políticas de RRHH deben considerar tanto las necesidades materiales como las de reconocimiento y desarrollo.</p>
+
+
+<!-- SVG Ciclo RRHH -->
+<svg class="fig" viewBox="0 0 500 200" xmlns="http://www.w3.org/2000/svg" style="max-width:500px;border:1px solid #e5e5e5;background:#fff;padding:14px;border-radius:2px">
+  <title>Ciclo de la Función de Personal</title>
+  <!-- Título -->
+  <text x="250" y="16" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" font-weight="600" fill="#1a1a1a">Ciclo de Gestión de Personal</text>
+  <!-- Bloques secuenciales con flechas -->
+  <!-- 1: Descripción de puesto -->
+  <rect x="10" y="30" width="86" height="48" rx="2" fill="#1a1a1a"/>
+  <text x="53" y="52" text-anchor="middle" fill="#fff" font-family="system-ui,sans-serif" font-size="9" font-weight="600">Descripción</text>
+  <text x="53" y="63" text-anchor="middle" fill="#fff" font-family="system-ui,sans-serif" font-size="9" font-weight="600">de puesto</text>
+  <!-- flecha -->
+  <line x1="96" y1="54" x2="106" y2="54" stroke="#555" stroke-width="1.5"/>
+  <polygon points="106,50 114,54 106,58" fill="#555"/>
+  <!-- 2: Reclutamiento -->
+  <rect x="114" y="30" width="80" height="48" rx="2" fill="#333"/>
+  <text x="154" y="52" text-anchor="middle" fill="#fff" font-family="system-ui,sans-serif" font-size="9" font-weight="600">Reclutamiento</text>
+  <text x="154" y="63" text-anchor="middle" fill="#ccc" font-family="system-ui,sans-serif" font-size="8">Interno/Externo</text>
+  <line x1="194" y1="54" x2="204" y2="54" stroke="#555" stroke-width="1.5"/>
+  <polygon points="204,50 212,54 204,58" fill="#555"/>
+  <!-- 3: Selección -->
+  <rect x="212" y="30" width="76" height="48" rx="2" fill="#333"/>
+  <text x="250" y="52" text-anchor="middle" fill="#fff" font-family="system-ui,sans-serif" font-size="9" font-weight="600">Selección</text>
+  <text x="250" y="63" text-anchor="middle" fill="#ccc" font-family="system-ui,sans-serif" font-size="8">CV+entrevista</text>
+  <line x1="288" y1="54" x2="298" y2="54" stroke="#555" stroke-width="1.5"/>
+  <polygon points="298,50 306,54 298,58" fill="#555"/>
+  <!-- 4: Ingreso/Inducción -->
+  <rect x="306" y="30" width="76" height="48" rx="2" fill="#555"/>
+  <text x="344" y="52" text-anchor="middle" fill="#fff" font-family="system-ui,sans-serif" font-size="9" font-weight="600">Ingreso e</text>
+  <text x="344" y="63" text-anchor="middle" fill="#fff" font-family="system-ui,sans-serif" font-size="9" font-weight="600">inducción</text>
+  <line x1="382" y1="54" x2="392" y2="54" stroke="#555" stroke-width="1.5"/>
+  <polygon points="392,50 400,54 392,58" fill="#555"/>
+  <!-- 5: Desarrollo -->
+  <rect x="400" y="30" width="86" height="48" rx="2" fill="#555"/>
+  <text x="443" y="52" text-anchor="middle" fill="#fff" font-family="system-ui,sans-serif" font-size="9" font-weight="600">Capacitación</text>
+  <text x="443" y="63" text-anchor="middle" fill="#fff" font-family="system-ui,sans-serif" font-size="9" font-weight="600">y evaluación</text>
+  <!-- Segunda fila: mantenimiento -->
+  <rect x="166" y="120" width="168" height="48" rx="2" fill="#888"/>
+  <text x="250" y="142" text-anchor="middle" fill="#fff" font-family="system-ui,sans-serif" font-size="9" font-weight="600">MANTENIMIENTO</text>
+  <text x="250" y="154" text-anchor="middle" fill="#eee" font-family="system-ui,sans-serif" font-size="8">Remuneración · Condiciones · Motivación</text>
+  <!-- Flechas hacia mantenimiento -->
+  <line x1="250" y1="78" x2="250" y2="120" stroke="#888" stroke-width="1.2" stroke-dasharray="4,3"/>
+  <!-- Flecha retroalimentación: mantenimiento regresa a todo el ciclo -->
+  <line x1="166" y1="144" x2="53" y2="144" stroke="#888" stroke-width="1" stroke-dasharray="3,3"/>
+  <line x1="53" y1="144" x2="53" y2="78" stroke="#888" stroke-width="1" stroke-dasharray="3,3"/>
+  <polygon points="53,78 49,86 57,86" fill="#888"/>
+  <text x="108" y="158" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8" fill="#888">retroalimentación</text>
+</svg>
+<p class="fig-cap">Ciclo de la Gestión de Personal: desde la descripción del puesto hasta el mantenimiento y la retroalimentación al sistema.</p>
+
+
+<h2 id="quiz">Mini-quiz: Unidad 6</h2>
+
+<div class="quiz-section">
+<h3>Pone a prueba lo que aprendiste</h3>
+
+<p class="quiz-q">1. ¿Cuál es la diferencia entre reclutamiento y selección?</p>
+<div class="quiz-opts" id="q1">
+  <label><input type="radio" name="q1" value="a"> a) Son sinónimos: ambos se refieren a contratar personal</label>
+  <label><input type="radio" name="q1" value="b"> b) El reclutamiento atrae candidatos; la selección elige al más apto entre ellos</label>
+  <label><input type="radio" name="q1" value="c"> c) El reclutamiento es externo y la selección es siempre interna</label>
+</div>
+
+<p class="quiz-q">2. Una ventaja del reclutamiento interno es:</p>
+<div class="quiz-opts" id="q2">
+  <label><input type="radio" name="q2" value="a"> a) Incorpora ideas nuevas y perspectivas externas</label>
+  <label><input type="radio" name="q2" value="b"> b) Amplía significativamente la base de candidatos disponibles</label>
+  <label><input type="radio" name="q2" value="c"> c) Motiva al personal existente y reduce el tiempo de adaptación</label>
+</div>
+
+<p class="quiz-q">3. La descripción de puesto incluye:</p>
+<div class="quiz-opts" id="q3">
+  <label><input type="radio" name="q3" value="a"> a) Los requisitos que debe cumplir la persona (perfil del candidato)</label>
+  <label><input type="radio" name="q3" value="b"> b) Las tareas, responsabilidades, misión del puesto y relaciones jerárquicas</label>
+  <label><input type="radio" name="q3" value="c"> c) El sueldo máximo y mínimo del puesto</label>
+</div>
+
+<p class="quiz-q">4. La evaluación de desempeño sirve para:</p>
+<div class="quiz-opts" id="q4">
+  <label><input type="radio" name="q4" value="a"> a) Despedir empleados que no cumplen con el mínimo legal</label>
+  <label><input type="radio" name="q4" value="b"> b) Medir el rendimiento respecto a objetivos y tomar decisiones de desarrollo y compensación</label>
+  <label><input type="radio" name="q4" value="c"> c) Rediseñar el organigrama de la empresa</label>
+</div>
+
+<p class="quiz-q">5. El subsistema de mantenimiento de RRHH comprende:</p>
+<div class="quiz-opts" id="q5">
+  <label><input type="radio" name="q5" value="a"> a) Reclutamiento, selección e inducción</label>
+  <label><input type="radio" name="q5" value="b"> b) Capacitación y evaluación de desempeño</label>
+  <label><input type="radio" name="q5" value="c"> c) Remuneraciones, condiciones de trabajo y motivación</label>
+</div>
+
+<p class="quiz-q">6. La evaluación 360° se distingue porque:</p>
+<div class="quiz-opts" id="q6">
+  <label><input type="radio" name="q6" value="a"> a) Solo la realiza el jefe directo del empleado</label>
+  <label><input type="radio" name="q6" value="b"> b) Recoge opiniones del jefe, pares, subordinados y el propio empleado</label>
+  <label><input type="radio" name="q6" value="c"> c) Evalúa solo el desempeño financiero del área</label>
+</div>
+
+<p class="quiz-q">7. ¿Cuál de los siguientes es un beneficio no monetario en RRHH?</p>
+<div class="quiz-opts" id="q7">
+  <label><input type="radio" name="q7" value="a"> a) Sueldo básico mensual</label>
+  <label><input type="radio" name="q7" value="b"> b) Aportes jubilatorios</label>
+  <label><input type="radio" name="q7" value="c"> c) Horario flexible y auto de empresa</label>
+</div>
+
+<button class="quiz-btn" onclick="corregirQuizU6()">Ver resultados</button>
+<div class="quiz-result" id="quiz-u6-result"></div>
+</div>
+
+
+<footer>
+  Administración I · UCES 2026 · Segundo Parcial
+  <br>
+  <a href="u3.html" style="color:#888">U3: Estructuras</a> ·
+  <a href="u4.html" style="color:#888">U4: Punto de Equilibrio</a> ·
+  <a href="u5.html" style="color:#888">U5: Producción</a> ·
+  <a href="final.html" style="color:#888">Final integrador</a>
+</footer>
+
+</div>
+
+<script>
+const corrU6={q1:'b',q2:'c',q3:'b',q4:'b',q5:'c',q6:'b',q7:'c'};
+const explU6={
+  q1:'Reclutamiento: atrae candidatos al proceso. Selección: compara y elige al más apto entre los candidatos atraídos.',
+  q2:'Reclutamiento interno: el candidato ya conoce la empresa, se adapta más rápido y motiva al equipo al ver posibilidades de crecimiento.',
+  q3:'La descripción de puesto detalla las tareas, responsabilidades, misión y relaciones. El "perfil" o análisis de puesto describe los requisitos de la persona.',
+  q4:'La evaluación de desempeño mide el rendimiento y es base para decisiones de capacitación, promoción y remuneración.',
+  q5:'Mantenimiento: remuneraciones, condiciones de trabajo y motivación. Incorporación: reclutamiento+selección. Desarrollo: capacitación+evaluación.',
+  q6:'360°: opinan el jefe, los pares del mismo nivel, los subordinados y el propio evaluado. Da una visión completa.',
+  q7:'Beneficios no monetarios: horario flexible, auto de empresa, capacitación pagada, tickets de almuerzo. El sueldo y los aportes son monetarios.'
+};
+function corregirQuizU6(){
+  let ok=0,total=Object.keys(corrU6).length,html='';
+  for(const [q,c] of Object.entries(corrU6)){
+    const sel=document.querySelector(`input[name="${q}"]:checked`);
+    if(!sel){html+=`<p class="quiz-feedback mal">Pregunta ${q.slice(1)}: sin respuesta. Correcta: ${c.toUpperCase()}. ${explU6[q]}</p>`;continue;}
+    if(sel.value===c){ok++;html+=`<p class="quiz-feedback ok">Pregunta ${q.slice(1)}: correcto.</p>`;}
+    else{html+=`<p class="quiz-feedback mal">Pregunta ${q.slice(1)}: incorrecto (elegiste ${sel.value.toUpperCase()}, correcta: ${c.toUpperCase()}). ${explU6[q]}</p>`;}
+  }
+  document.getElementById('quiz-u6-result').innerHTML=`<p style="margin-bottom:8px">Resultado: ${ok}/${total} correctas.</p>${html}`;
+}
+if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js');}
+</script>
+</body>
+</html>

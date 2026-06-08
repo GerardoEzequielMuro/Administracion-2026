@@ -1,7 +1,7 @@
 {
-  "name": "Administración I - Parcial 1 UCES",
+  "name": "Administración I - UCES 2026",
   "short_name": "Administración",
-  "description": "Resumen, mapa mental, casos resueltos y parciales simulados de Administración de Empresas I (UCES 2026)",
+  "description": "Resumen completo U1-U6, calculadora de Punto de Equilibrio, final integrador interactivo y parciales simulados de Administración de Empresas I (UCES 2026)",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",

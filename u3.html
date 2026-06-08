@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>U3 - Estructuras Orgánicas | Administración I UCES 2026</title>
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#1a1a1a">
+<link rel="icon" type="image/svg+xml" href="icon.svg">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Administración">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:80px}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+  background:#fafafa;color:#1a1a1a;line-height:1.7;font-size:16px;
+  -webkit-font-smoothing:antialiased;
+}
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  background:rgba(250,250,250,.92);backdrop-filter:blur(10px);
+  border-bottom:1px solid #e5e5e5;padding:12px 0;
+}
+.nav-inner{
+  max-width:820px;margin:0 auto;padding:0 32px;
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+}
+.nav-title{font-weight:600;font-size:15px;white-space:nowrap}
+.nav-links{display:flex;gap:14px;overflow-x:auto;font-size:12.5px}
+.nav-links a{color:#666;text-decoration:none;white-space:nowrap}
+.nav-links a:hover{color:#1a1a1a}
+.nav-links a.active{color:#1a1a1a;font-weight:700}
+
+.container{max-width:820px;margin:0 auto;padding:90px 32px 80px}
+
+h1{font-size:30px;font-weight:700;letter-spacing:-.02em;margin-bottom:6px;line-height:1.2}
+.subtitle{color:#666;font-size:14.5px;margin-bottom:28px}
+
+h2{
+  font-size:22px;font-weight:700;margin:52px 0 14px;line-height:1.3;
+  padding-top:24px;border-top:1px solid #e5e5e5;
+}
+h2:first-of-type{border-top:none;padding-top:0;margin-top:0}
+.unit{
+  text-transform:uppercase;font-size:13px;letter-spacing:.12em;
+  color:#888;margin:60px 0 0;border:none;padding:0;font-weight:600;
+}
+h3{font-size:16px;font-weight:600;margin:24px 0 8px}
+
+p{margin:8px 0;color:#333}
+strong{color:#1a1a1a;font-weight:600}
+em{color:#333}
+ul,ol{margin:8px 0;padding-left:22px;color:#333}
+li{margin:4px 0}
+
+.fig{display:block;max-width:100%;height:auto;margin:14px auto}
+.fig-cap{font-size:12.5px;color:#888;text-align:center;margin:-8px 0 14px;font-style:italic}
+
+.box{
+  background:#f5f5f5;padding:14px 18px;margin:14px 0;
+  border-left:2px solid #1a1a1a;border-radius:2px;
+}
+.box p:first-child{margin-top:0}.box p:last-child{margin-bottom:0}
+.box .label{
+  font-size:10.5px;font-weight:600;text-transform:uppercase;
+  letter-spacing:.08em;color:#666;display:block;margin-bottom:4px;
+}
+
+table{width:100%;border-collapse:collapse;margin:12px 0;font-size:13.5px;border:1px solid #e5e5e5;background:#fff}
+th{background:#f5f5f5;text-align:left;padding:8px 10px;font-weight:600;font-size:11.5px;text-transform:uppercase;letter-spacing:.05em;border-bottom:1px solid #e5e5e5}
+td{padding:8px 10px;border-bottom:1px solid #f0f0f0;vertical-align:top;color:#333}
+tr:last-child td{border-bottom:none}
+
+.quiz-section{background:#f5f5f5;padding:20px 22px;border-radius:4px;margin:28px 0}
+.quiz-section h3{margin-top:0;font-size:15px}
+.quiz-q{margin:16px 0 6px;font-weight:600;font-size:14.5px;color:#1a1a1a}
+.quiz-opts label{display:block;margin:4px 0;cursor:pointer;font-size:14px;color:#333}
+.quiz-opts input{margin-right:7px}
+.quiz-btn{
+  margin-top:16px;padding:8px 22px;background:#1a1a1a;color:#fff;
+  border:none;border-radius:2px;font-size:14px;cursor:pointer;font-family:inherit;
+}
+.quiz-btn:hover{background:#333}
+.quiz-result{margin-top:14px;font-size:14px;font-weight:600;color:#1a1a1a}
+.quiz-feedback{margin:4px 0;font-size:13px;color:#555}
+.quiz-feedback.ok{color:#1a6b1a}
+.quiz-feedback.mal{color:#c00}
+
+footer{margin-top:56px;padding-top:20px;border-top:1px solid #e5e5e5;color:#888;font-size:12.5px;text-align:center}
+
+@media(max-width:640px){
+  body{font-size:15px}
+  .container{padding:80px 18px 60px}
+  .nav-inner{padding:0 16px;gap:10px}
+  .nav-links{gap:10px;font-size:11.5px}
+  h1{font-size:24px}h2{font-size:18px;margin-top:42px}
+  table{font-size:12.5px}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="nav-title">Administración I</div>
+    <div class="nav-links">
+      <a href="index.html">Parcial 1</a>
+      <a href="u3.html" class="active">U3</a>
+      <a href="u4.html">U4</a>
+      <a href="u5.html">U5</a>
+      <a href="u6.html">U6</a>
+      <a href="final.html" style="color:#c00;font-weight:700">Final</a>
+      <a href="mapa-mental.html">Mapa</a>
+      <a href="parciales.html">Simulados</a>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+
+<h1>Unidad 3. Estructuras Orgánicas</h1>
+<p class="subtitle">UCES 2026 · Administración I · Segundo Parcial</p>
+
+<div class="box">
+<span class="label">Temas de esta unidad</span>
+<p><strong>Diseño organizacional:</strong> concepto, estructura formal e informal, organigrama (tipos y formas). <strong>Principios:</strong> unidad de mando, amplitud de control, delegación, coordinación. <strong>Relaciones formales:</strong> lineal, funcional, staff. <strong>Departamentalización:</strong> tipos (funcional, geográfica, por producto, por cliente, mixta). <strong>Centralización vs. descentralización.</strong></p>
+</div>
+
+
+<h2 id="estructura">Diseño organizacional</h2>
+
+<p>El <strong>diseño organizacional</strong> es el proceso por el cual los directivos construyen, evalúan y modifican la estructura formal de la organización para que pueda alcanzar sus objetivos de forma eficiente. No existe un diseño único válido para todas las empresas: depende del tamaño, el entorno, la tecnología y la estrategia.</p>
+
+<h3>Estructura formal e informal</h3>
+
+<p>La <strong>estructura formal</strong> es la que la empresa establece explícitamente mediante normas, manuales y organigramas. Determina quién tiene autoridad sobre quién, cómo se dividen las tareas y cómo circula la información de manera oficial.</p>
+
+<p>La <strong>estructura informal</strong> surge espontáneamente de las relaciones personales entre los miembros de la organización. No aparece en ningún papel pero influye poderosamente: agiliza o traba la comunicación, genera líderes no formales y puede apoyar u oponerse a los objetivos de la dirección.</p>
+
+<div class="box">
+<span class="label">Para el parcial</span>
+<p>La estructura formal es la que se diseña y se dibuja en el organigrama. La informal es la red de relaciones reales que existe por debajo de esa estructura. Ambas coexisten siempre.</p>
+</div>
+
+<h3>El organigrama</h3>
+
+<p>El <strong>organigrama</strong> es la representación gráfica de la estructura formal de la organización. Muestra los puestos, los niveles jerárquicos y las relaciones de dependencia. Es una "fotografía" de la estructura en un momento dado.</p>
+
+<p><strong>Lo que muestra el organigrama:</strong></p>
+<ul>
+  <li>Los puestos o cargos existentes</li>
+  <li>La jerarquía (quién depende de quién)</li>
+  <li>Las líneas de autoridad y comunicación formal</li>
+  <li>La división del trabajo y la departamentalización</li>
+</ul>
+
+<p><strong>Lo que NO muestra:</strong> la carga de trabajo real, las relaciones informales, la eficiencia de las personas, ni los procesos concretos.</p>
+
+<h3>Formas del organigrama</h3>
+
+<table>
+<tr><th>Forma</th><th>Descripción</th></tr>
+<tr><td><strong>Vertical</strong></td><td>La jerarquía mayor va arriba y los niveles inferiores hacia abajo. Es la más usada.</td></tr>
+<tr><td><strong>Horizontal</strong></td><td>La jerarquía mayor va a la izquierda y los niveles inferiores se despliegan hacia la derecha.</td></tr>
+<tr><td><strong>Circular</strong></td><td>El nivel más alto ocupa el centro y los demás niveles se ubican en anillos concéntricos hacia afuera.</td></tr>
+<tr><td><strong>Mixto</strong></td><td>Combina dos o más formas anteriores según la conveniencia de la empresa.</td></tr>
+</table>
+
+
+<h2 id="principios">Principios de la organización</h2>
+
+<p>Son reglas o guías que orientan la construcción de la estructura. El apunte de cátedra destaca cuatro principios fundamentales:</p>
+
+<h3>1. Unidad de mando</h3>
+<p>Cada persona debe recibir órdenes de <strong>un solo superior</strong>. Si un empleado tiene dos jefes que le dan instrucciones contradictorias, se genera confusión y conflicto. Este principio viene de Fayol y sigue siendo esencial en la práctica.</p>
+
+<h3>2. Amplitud de control (o tramo de control)</h3>
+<p>Hace referencia a la <strong>cantidad de subordinados que un superior puede supervisar eficientemente</strong>. Si el tramo es muy amplio, el jefe no puede controlar bien a todos. Si es muy estrecho, la estructura se vuelve costosa y burocrática. El número ideal depende de la complejidad del trabajo, la experiencia de los subordinados y la disponibilidad de sistemas de información.</p>
+
+<div class="box">
+<span class="label">Tramo amplio vs. tramo estrecho</span>
+<p><strong>Tramo amplio:</strong> muchos subordinados por jefe. Estructura más plana, menos niveles. Más autonomía para el empleado.</p>
+<p><strong>Tramo estrecho:</strong> pocos subordinados por jefe. Estructura más alta, más niveles. Mayor supervisión directa.</p>
+</div>
+
+<h3>3. Delegación de autoridad</h3>
+<p>Delegar es <strong>transferir a un subordinado la autoridad necesaria para que tome decisiones</strong> dentro de su área de responsabilidad. Se delega la autoridad pero no la responsabilidad final: el superior sigue siendo responsable ante sus propios jefes por los resultados.</p>
+<p>Una organización que no delega concentra todas las decisiones en pocos directivos, lo que genera cuellos de botella y frena el crecimiento.</p>
+
+<h3>4. Coordinación</h3>
+<p>Es el proceso de <strong>integrar las actividades de los distintos sectores y personas</strong> para que trabajen en forma armónica hacia un objetivo común. Sin coordinación, cada área puede optimizar su propio trabajo pero perjudicar al conjunto. Se logra mediante reuniones, normas, sistemas de información compartidos y estructura jerárquica.</p>
+
+
+<h2 id="relaciones">Relaciones formales: lineal, funcional y staff</h2>
+
+<p>Dentro de la estructura formal existen tres tipos de relaciones de autoridad:</p>
+
+<h3>Relación lineal (o de línea)</h3>
+<p>Es la relación de autoridad directa entre un superior y sus subordinados. La orden baja en línea recta desde el nivel más alto hasta el más bajo. Es el tipo de relación más simple y define la cadena de mando principal.</p>
+
+<!-- SVG Organigrama Lineal -->
+<svg class="fig" viewBox="0 0 480 200" xmlns="http://www.w3.org/2000/svg" style="max-width:480px;border:1px solid #e5e5e5;background:#fff;padding:12px;border-radius:2px">
+  <title>Organigrama lineal</title>
+  <!-- Nivel 1 -->
+  <rect x="165" y="10" width="150" height="36" rx="2" fill="#1a1a1a"/>
+  <text x="240" y="33" text-anchor="middle" fill="#fff" font-family="system-ui,sans-serif" font-size="12" font-weight="600">Gerencia General</text>
+  <!-- Línea central hacia abajo -->
+  <line x1="240" y1="46" x2="240" y2="76" stroke="#1a1a1a" stroke-width="1.5"/>
+  <!-- Nivel 2 - 3 cajas -->
+  <line x1="80" y1="76" x2="400" y2="76" stroke="#1a1a1a" stroke-width="1.5"/>
+  <line x1="80" y1="76" x2="80" y2="92" stroke="#1a1a1a" stroke-width="1.5"/>
+  <line x1="240" y1="76" x2="240" y2="92" stroke="#1a1a1a" stroke-width="1.5"/>
+  <line x1="400" y1="76" x2="400" y2="92" stroke="#1a1a1a" stroke-width="1.5"/>
+  <rect x="20" y="92" width="120" height="34" rx="2" fill="#333"/>
+  <text x="80" y="114" text-anchor="middle" fill="#fff" font-family="system-ui,sans-serif" font-size="11">Producción</text>
+  <rect x="180" y="92" width="120" height="34" rx="2" fill="#333"/>
+  <text x="240" y="114" text-anchor="middle" fill="#fff" font-family="system-ui,sans-serif" font-size="11">Comercialización</text>
+  <rect x="340" y="92" width="120" height="34" rx="2" fill="#333"/>
+  <text x="400" y="114" text-anchor="middle" fill="#fff" font-family="system-ui,sans-serif" font-size="11">Administración</text>
+  <!-- Nivel 3 debajo de Producción -->
+  <line x1="80" y1="126" x2="80" y2="148" stroke="#666" stroke-width="1.2"/>
+  <line x1="50" y1="148" x2="110" y2="148" stroke="#666" stroke-width="1.2"/>
+  <line x1="50" y1="148" x2="50" y2="160" stroke="#666" stroke-width="1.2"/>
+  <line x1="110" y1="148" x2="110" y2="160" stroke="#666" stroke-width="1.2"/>
+  <rect x="14" y="160" width="72" height="28" rx="2" fill="#888"/>
+  <text x="50" y="179" text-anchor="middle" fill="#fff" font-family="system-ui,sans-serif" font-size="10">Operarios</text>
+  <rect x="74" y="160" width="72" height="28" rx="2" fill="#888"/>
+  <text x="110" y="179" text-anchor="middle" fill="#fff" font-family="system-ui,sans-serif" font-size="10">Mantenimiento</text>
+</svg>
+<p class="fig-cap">Organigrama lineal (vertical): cadena de mando directa de arriba hacia abajo.</p>
+
+<h3>Relación funcional</h3>
+<p>Cada especialista o jefe funcional tiene autoridad sobre las personas en su área de especialización, <strong>independientemente del sector al que pertenezcan</strong>. Por ejemplo, el responsable de Calidad puede dar instrucciones a trabajadores de Producción, Depósito y Despacho en todo lo que compete a calidad. Viola la unidad de mando pero aprovecha mejor el conocimiento especializado.</p>
+
+<!-- SVG Organigrama Funcional -->
+<svg class="fig" viewBox="0 0 480 200" xmlns="http://www.w3.org/2000/svg" style="max-width:480px;border:1px solid #e5e5e5;background:#fff;padding:12px;border-radius:2px">
+  <title>Organigrama funcional</title>
+  <rect x="165" y="10" width="150" height="36" rx="2" fill="#1a1a1a"/>
+  <text x="240" y="33" text-anchor="middle" fill="#fff" font-family="system-ui,sans-serif" font-size="12" font-weight="600">Dirección</text>
+  <line x1="240" y1="46" x2="240" y2="76" stroke="#1a1a1a" stroke-width="1.5"/>
+  <line x1="80" y1="76" x2="400" y2="76" stroke="#1a1a1a" stroke-width="1.5"/>
+  <line x1="80" y1="76" x2="80" y2="92" stroke="#1a1a1a" stroke-width="1.5"/>
+  <line x1="240" y1="76" x2="240" y2="92" stroke="#1a1a1a" stroke-width="1.5"/>
+  <line x1="400" y1="76" x2="400" y2="92" stroke="#1a1a1a" stroke-width="1.5"/>
+  <rect x="14" y="92" width="132" height="34" rx="2" fill="#333"/>
+  <text x="80" y="109" text-anchor="middle" fill="#fff" font-family="system-ui,sans-serif" font-size="10">Jefe de Finanzas</text>
+  <text x="80" y="121" text-anchor="middle" fill="#ddd" font-family="system-ui,sans-serif" font-size="9">(autoridad funcional)</text>
+  <rect x="174" y="92" width="132" height="34" rx="2" fill="#333"/>
+  <text x="240" y="109" text-anchor="middle" fill="#fff" font-family="system-ui,sans-serif" font-size="10">Jefe de RRHH</text>
+  <text x="240" y="121" text-anchor="middle" fill="#ddd" font-family="system-ui,sans-serif" font-size="9">(autoridad funcional)</text>
+  <rect x="334" y="92" width="132" height="34" rx="2" fill="#333"/>
+  <text x="400" y="109" text-anchor="middle" fill="#fff" font-family="system-ui,sans-serif" font-size="10">Jefe de Calidad</text>
+  <text x="400" y="121" text-anchor="middle" fill="#ddd" font-family="system-ui,sans-serif" font-size="9">(autoridad funcional)</text>
+  <!-- Flechas funcionales punteadas hacia abajo -->
+  <line x1="80" y1="126" x2="80" y2="158" stroke="#888" stroke-dasharray="4,3" stroke-width="1.5"/>
+  <line x1="240" y1="126" x2="240" y2="158" stroke="#888" stroke-dasharray="4,3" stroke-width="1.5"/>
+  <line x1="400" y1="126" x2="400" y2="158" stroke="#888" stroke-dasharray="4,3" stroke-width="1.5"/>
+  <rect x="20" y="158" width="120" height="28" rx="2" fill="#bbb"/>
+  <text x="80" y="177" text-anchor="middle" fill="#1a1a1a" font-family="system-ui,sans-serif" font-size="10">Empleados</text>
+  <rect x="180" y="158" width="120" height="28" rx="2" fill="#bbb"/>
+  <text x="240" y="177" text-anchor="middle" fill="#1a1a1a" font-family="system-ui,sans-serif" font-size="10">Empleados</text>
+  <rect x="340" y="158" width="120" height="28" rx="2" fill="#bbb"/>
+  <text x="400" y="177" text-anchor="middle" fill="#1a1a1a" font-family="system-ui,sans-serif" font-size="10">Empleados</text>
+</svg>
+<p class="fig-cap">Organigrama funcional: cada jefe especialista tiene autoridad sobre todos en su area de especialidad (lineas punteadas).</p>
+
+<h3>Relación staff (o asesoría)</h3>
+<p>El staff es un puesto de <strong>asesoramiento y apoyo</strong> sin autoridad de mando. Aconseja, investiga y recomienda, pero no da órdenes a los demás. Por ejemplo, un asesor legal, un consultor externo o un departamento de I+D. Se representa en el organigrama con una línea lateral (no vertical).</p>
+
+<!-- SVG Organigrama con Staff -->
+<svg class="fig" viewBox="0 0 480 190" xmlns="http://www.w3.org/2000/svg" style="max-width:480px;border:1px solid #e5e5e5;background:#fff;padding:12px;border-radius:2px">
+  <title>Organigrama con staff</title>
+  <rect x="165" y="10" width="150" height="36" rx="2" fill="#1a1a1a"/>
+  <text x="240" y="33" text-anchor="middle" fill="#fff" font-family="system-ui,sans-serif" font-size="12" font-weight="600">Gerencia General</text>
+  <!-- Staff lateral -->
+  <line x1="315" y1="28" x2="360" y2="28" stroke="#888" stroke-dasharray="5,3" stroke-width="1.5"/>
+  <rect x="360" y="14" width="106" height="28" rx="2" fill="#e8e8e8" stroke="#aaa" stroke-width="1"/>
+  <text x="413" y="28" text-anchor="middle" fill="#444" font-family="system-ui,sans-serif" font-size="10" font-weight="600">Asesoría Legal</text>
+  <text x="413" y="38" text-anchor="middle" fill="#888" font-family="system-ui,sans-serif" font-size="9">(staff)</text>
+  <!-- Línea principal hacia abajo -->
+  <line x1="240" y1="46" x2="240" y2="76" stroke="#1a1a1a" stroke-width="1.5"/>
+  <line x1="100" y1="76" x2="380" y2="76" stroke="#1a1a1a" stroke-width="1.5"/>
+  <line x1="100" y1="76" x2="100" y2="92" stroke="#1a1a1a" stroke-width="1.5"/>
+  <line x1="240" y1="76" x2="240" y2="92" stroke="#1a1a1a" stroke-width="1.5"/>
+  <line x1="380" y1="76" x2="380" y2="92" stroke="#1a1a1a" stroke-width="1.5"/>
+  <rect x="34" y="92" width="132" height="34" rx="2" fill="#333"/>
+  <text x="100" y="114" text-anchor="middle" fill="#fff" font-family="system-ui,sans-serif" font-size="11">Producción</text>
+  <rect x="174" y="92" width="132" height="34" rx="2" fill="#333"/>
+  <text x="240" y="114" text-anchor="middle" fill="#fff" font-family="system-ui,sans-serif" font-size="11">Ventas</text>
+  <rect x="314" y="92" width="132" height="34" rx="2" fill="#333"/>
+  <text x="380" y="114" text-anchor="middle" fill="#fff" font-family="system-ui,sans-serif" font-size="11">Finanzas</text>
+  <!-- Leyenda -->
+  <line x1="30" y1="160" x2="70" y2="160" stroke="#1a1a1a" stroke-width="1.5"/>
+  <text x="76" y="164" fill="#555" font-family="system-ui,sans-serif" font-size="10">Autoridad de línea</text>
+  <line x1="200" y1="160" x2="240" y2="160" stroke="#888" stroke-dasharray="5,3" stroke-width="1.5"/>
+  <text x="246" y="164" fill="#555" font-family="system-ui,sans-serif" font-size="10">Relación staff (asesora)</text>
+</svg>
+<p class="fig-cap">Organigrama lineal con staff: la Asesoria Legal aparece en posicion lateral con linea punteada, sin autoridad de mando.</p>
+
+<table>
+<tr><th>Tipo de relación</th><th>Autoridad</th><th>Característica clave</th></tr>
+<tr><td><strong>Lineal</strong></td><td>Directa, hacia abajo</td><td>Cadena de mando simple. Respeta unidad de mando.</td></tr>
+<tr><td><strong>Funcional</strong></td><td>Especializada, horizontal</td><td>El especialista manda en su area aunque no sea jefe directo. Puede violar unidad de mando.</td></tr>
+<tr><td><strong>Staff</strong></td><td>Ninguna (asesora)</td><td>Solo aconseja. No da ordenes. Se muestra con linea lateral punteada.</td></tr>
+</table>
+
+
+<h2 id="departamentalizacion">Departamentalización</h2>
+
+<p>La <strong>departamentalización</strong> es la forma en que se agrupan las tareas y las personas en unidades o departamentos dentro de la organización. Es el criterio que se usa para dividir el trabajo y construir la estructura.</p>
+
+<h3>Tipos de departamentalización</h3>
+
+<table>
+<tr><th>Tipo</th><th>Criterio de agrupación</th><th>Ventaja principal</th><th>Desventaja principal</th></tr>
+<tr>
+  <td><strong>Funcional</strong></td>
+  <td>Por funciones de la empresa: Producción, Ventas, Finanzas, RRHH.</td>
+  <td>Especialización. Economías de escala dentro de cada función.</td>
+  <td>Puede generar "chimeneas" o silos: cada area solo mira su propio objetivo.</td>
+</tr>
+<tr>
+  <td><strong>Por producto</strong></td>
+  <td>Cada division se organiza en torno a un producto o línea de productos.</td>
+  <td>Responsabilidad clara sobre cada producto. Facilita la coordinación.</td>
+  <td>Duplicacion de recursos (cada division tiene su propio personal de apoyo).</td>
+</tr>
+<tr>
+  <td><strong>Geográfica o territorial</strong></td>
+  <td>Por zonas o regiones: Norte, Sur, Interior, Exterior.</td>
+  <td>Adaptacion a las condiciones locales de cada mercado.</td>
+  <td>Dificulta la uniformidad de politicas y estándares.</td>
+</tr>
+<tr>
+  <td><strong>Por cliente</strong></td>
+  <td>Según el tipo de cliente al que se atiende: minoristas, mayoristas, gobierno, particulares.</td>
+  <td>Atencion especializada a cada segmento. Mejor servicio al cliente.</td>
+  <td>Puede generar conflictos entre departamentos cuando un mismo cliente tiene multiples perfiles.</td>
+</tr>
+<tr>
+  <td><strong>Por proceso</strong></td>
+  <td>Segun las etapas del proceso productivo: corte, ensamblado, pintura, control de calidad.</td>
+  <td>Eficiencia técnica dentro de cada etapa.</td>
+  <td>Dificultad para coordinar el flujo entre etapas.</td>
+</tr>
+<tr>
+  <td><strong>Mixta</strong></td>
+  <td>Combina dos o más criterios segun el nivel jerarquico.</td>
+  <td>Flexibilidad para adaptarse a estructuras complejas.</td>
+  <td>Mayor complejidad de gestión.</td>
+</tr>
+</table>
+
+<div class="box">
+<span class="label">Ejemplo practico</span>
+<p>Una empresa mediana argentina puede tener departamentalización <strong>funcional</strong> en el primer nivel (Producción, Comercial, Administración) y dentro de Comercial una departamentalización <strong>geográfica</strong> (Buenos Aires, Interior, Exportaciones). Esto es una estructura mixta.</p>
+</div>
+
+
+<h2 id="centralizacion">Centralización vs. Descentralización</h2>
+
+<p>Este concepto hace referencia a <strong>en qué nivel jerárquico se toman las decisiones</strong>.</p>
+
+<p>En una organización <strong>centralizada</strong>, las decisiones importantes se concentran en los niveles más altos de la jerarquía. Los niveles inferiores ejecutan pero no deciden.</p>
+
+<p>En una organización <strong>descentralizada</strong>, la autoridad para tomar decisiones se delega hacia los niveles medios e inferiores. Cada unidad o gerencia tiene más autonomía.</p>
+
+<table>
+<tr><th>Aspecto</th><th>Centralización</th><th>Descentralización</th></tr>
+<tr><td>Toma de decisiones</td><td>Concentrada en la cúpula</td><td>Distribuida en varios niveles</td></tr>
+<tr><td>Velocidad de decisión</td><td>Lenta (todo sube)</td><td>Rápida (decide quien esta cerca del problema)</td></tr>
+<tr><td>Uniformidad</td><td>Alta (criterio unico)</td><td>Menor (cada area puede decidir distinto)</td></tr>
+<tr><td>Aprovechamiento del talento</td><td>Bajo (los niveles medios solo ejecutan)</td><td>Alto (los mandos medios desarrollan criterio)</td></tr>
+<tr><td>Riesgo de errores</td><td>Menor (control directo)</td><td>Mayor (mas personas toman decisiones)</td></tr>
+<tr><td>Adecuada cuando...</td><td>La empresa es pequeña, el entorno es estable, se requiere unidad de criterio.</td><td>La empresa es grande, opera en multiples mercados o necesita rapidez de respuesta.</td></tr>
+</table>
+
+<div class="box">
+<span class="label">Concepto clave</span>
+<p>La descentralización no es lo mismo que la delegación. La <strong>delegación</strong> es un acto puntual por el cual un superior transfiere autoridad a un subordinado. La <strong>descentralización</strong> es una política o filosofía que afecta a toda la estructura: el grado en que la autoridad para decidir se distribuye hacia abajo en forma sistemática.</p>
+</div>
+
+
+<h2 id="quiz">Mini-quiz: Unidad 3</h2>
+
+<div class="quiz-section">
+<h3>Pone a prueba lo que aprendiste</h3>
+
+<p class="quiz-q">1. ¿Qué muestra el organigrama?</p>
+<div class="quiz-opts" id="q1">
+  <label><input type="radio" name="q1" value="a"> a) Las relaciones informales entre empleados</label>
+  <label><input type="radio" name="q1" value="b"> b) La estructura formal: puestos, jerarquía y relaciones de dependencia</label>
+  <label><input type="radio" name="q1" value="c"> c) El sueldo de cada puesto y la carga de trabajo real</label>
+</div>
+
+<p class="quiz-q">2. El principio de unidad de mando establece que:</p>
+<div class="quiz-opts" id="q2">
+  <label><input type="radio" name="q2" value="a"> a) Una persona puede tener varios jefes si todos son del mismo rango</label>
+  <label><input type="radio" name="q2" value="b"> b) Cada subordinado debe recibir órdenes de un solo superior</label>
+  <label><input type="radio" name="q2" value="c"> c) Todos los jefes deben tener el mismo número de subordinados</label>
+</div>
+
+<p class="quiz-q">3. La relación staff en un organigrama:</p>
+<div class="quiz-opts" id="q3">
+  <label><input type="radio" name="q3" value="a"> a) Tiene autoridad directa sobre todos los departamentos</label>
+  <label><input type="radio" name="q3" value="b"> b) Solo asesora, no da órdenes ni tiene mando</label>
+  <label><input type="radio" name="q3" value="c"> c) Es igual a la relación funcional</label>
+</div>
+
+<p class="quiz-q">4. ¿Qué tipo de departamentalización agrupa según regiones del país?</p>
+<div class="quiz-opts" id="q4">
+  <label><input type="radio" name="q4" value="a"> a) Funcional</label>
+  <label><input type="radio" name="q4" value="b"> b) Por producto</label>
+  <label><input type="radio" name="q4" value="c"> c) Geográfica</label>
+</div>
+
+<p class="quiz-q">5. En una organización descentralizada:</p>
+<div class="quiz-opts" id="q5">
+  <label><input type="radio" name="q5" value="a"> a) Todas las decisiones importantes se concentran en la dirección</label>
+  <label><input type="radio" name="q5" value="b"> b) La autoridad para decidir se distribuye hacia niveles medios e inferiores</label>
+  <label><input type="radio" name="q5" value="c"> c) No existe jerarquía ni cadena de mando</label>
+</div>
+
+<p class="quiz-q">6. ¿Cuál de las siguientes afirmaciones sobre la estructura informal es correcta?</p>
+<div class="quiz-opts" id="q6">
+  <label><input type="radio" name="q6" value="a"> a) Surge de las normas y manuales de la empresa</label>
+  <label><input type="radio" name="q6" value="b"> b) Aparece en el organigrama con línea punteada</label>
+  <label><input type="radio" name="q6" value="c"> c) Surge espontáneamente de las relaciones personales y puede influir tanto positiva como negativamente</label>
+</div>
+
+<p class="quiz-q">7. Un tramo de control amplio implica:</p>
+<div class="quiz-opts" id="q7">
+  <label><input type="radio" name="q7" value="a"> a) Muchos subordinados por jefe, estructura más plana</label>
+  <label><input type="radio" name="q7" value="b"> b) Pocos subordinados por jefe, estructura más alta</label>
+  <label><input type="radio" name="q7" value="c"> c) Mayor supervisión directa y más control</label>
+</div>
+
+<button class="quiz-btn" onclick="corregirQuizU3()">Ver resultados</button>
+<div class="quiz-result" id="quiz-u3-result"></div>
+</div>
+
+
+<footer>
+  Administración I · UCES 2026 · Segundo Parcial
+  <br>
+  <a href="index.html" style="color:#888">Parcial 1</a> ·
+  <a href="u4.html" style="color:#888">U4: Producción y PE</a> ·
+  <a href="u5.html" style="color:#888">U5: Abastecimiento</a> ·
+  <a href="u6.html" style="color:#888">U6: RRHH</a> ·
+  <a href="final.html" style="color:#888">Final integrador</a>
+</footer>
+
+</div>
+
+<script>
+const corrU3 = {q1:'b',q2:'b',q3:'b',q4:'c',q5:'b',q6:'c',q7:'a'};
+const explU3 = {
+  q1:'El organigrama muestra la estructura formal: puestos, jerarquía y dependencias. No muestra relaciones informales ni sueldos.',
+  q2:'Unidad de mando (Fayol): cada persona recibe órdenes de un solo superior, evitando confusión y conflictos.',
+  q3:'El staff solo asesora y recomienda. No tiene autoridad de mando sobre ningún departamento.',
+  q4:'La departamentalización geográfica agrupa por zonas o regiones (Norte, Sur, Interior, Exterior).',
+  q5:'Descentralización: la autoridad para decidir se distribuye hacia abajo, los mandos medios tienen mayor autonomía.',
+  q6:'La estructura informal surge espontáneamente de las relaciones personales, no está en manuales ni organigramas.',
+  q7:'Tramo amplio: muchos subordinados por jefe, estructura más plana, mayor autonomía para el empleado.'
+};
+function corregirQuizU3(){
+  let ok=0,total=Object.keys(corrU3).length,html='';
+  for(const [q,c] of Object.entries(corrU3)){
+    const sel=document.querySelector(`input[name="${q}"]:checked`);
+    if(!sel){html+=`<p class="quiz-feedback mal">Pregunta ${q.slice(1)}: sin respuesta. Correcta: opción ${c.toUpperCase()}. ${explU3[q]}</p>`;continue;}
+    if(sel.value===c){ok++;html+=`<p class="quiz-feedback ok">Pregunta ${q.slice(1)}: correcto.</p>`;}
+    else{html+=`<p class="quiz-feedback mal">Pregunta ${q.slice(1)}: incorrecto (elegiste ${sel.value.toUpperCase()}, correcta: ${c.toUpperCase()}). ${explU3[q]}</p>`;}
+  }
+  document.getElementById('quiz-u3-result').innerHTML=`<p style="margin-bottom:8px">Resultado: ${ok}/${total} correctas.</p>${html}`;
+}
+if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js');}
+</script>
+</body>
+</html>
