@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2º Parcial (práctica) - Administración I | UCES</title>
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#1a1a1a">
+<link rel="icon" type="image/svg+xml" href="icon.svg">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:80px}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;background:#fafafa;color:#1a1a1a;line-height:1.7;font-size:16px;-webkit-font-smoothing:antialiased}
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(250,250,250,.92);backdrop-filter:blur(10px);border-bottom:1px solid #e5e5e5;padding:12px 0}
+.nav-inner{max-width:820px;margin:0 auto;padding:0 32px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.nav-title{font-weight:600;font-size:15px;white-space:nowrap}
+.nav-links{display:flex;gap:14px;overflow-x:auto;font-size:12.5px}
+.nav-links a{color:#666;text-decoration:none;white-space:nowrap}
+.nav-links a:hover{color:#1a1a1a}
+.container{max-width:820px;margin:0 auto;padding:90px 32px 80px}
+h1{font-size:28px;font-weight:700;letter-spacing:-.02em;margin-bottom:6px;line-height:1.2}
+.subtitle{color:#666;font-size:14.5px;margin-bottom:24px}
+h2{font-size:20px;font-weight:700;margin:46px 0 12px;padding-top:22px;border-top:1px solid #e5e5e5;line-height:1.3}
+h2:first-of-type{border-top:none;padding-top:0;margin-top:0}
+h3{font-size:16px;font-weight:600;margin:20px 0 8px;color:#333}
+p{margin:8px 0;color:#333}
+strong{color:#1a1a1a;font-weight:600}
+ol,ul{margin:8px 0;padding-left:22px;color:#333}
+li{margin:5px 0}
+img.fig{display:block;max-width:100%;height:auto;margin:14px auto;border:1px solid #e5e5e5;background:#fff;padding:8px;border-radius:2px}
+.fig-cap{font-size:12.5px;color:#888;text-align:center;margin:-6px 0 16px;font-style:italic}
+.real-box{background:#fff;border:1px solid #e5e5e5;border-radius:2px;padding:16px 20px;margin:14px 0}
+.real-box .meta{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:#666;margin-bottom:8px}
+.q-box{background:#f5f5f5;padding:14px 18px;margin:18px 0 0;border-left:2px solid #1a1a1a;border-radius:2px}
+.q-box .pts{display:inline-block;background:#1a1a1a;color:#fff;padding:1px 8px;border-radius:10px;font-size:11px;font-weight:600;margin-left:6px}
+.q-box ul{margin-top:8px}
+.btn{display:inline-block;margin:10px 0 0;background:#1a1a1a;color:#fff;border:none;padding:8px 16px;border-radius:20px;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit}
+.btn:hover{background:#333}
+.sol{display:none;background:#f0f9f4;border-left:2px solid #16a34a;padding:16px 20px;margin:10px 0 8px;border-radius:2px;font-size:14.5px}
+.sol.open{display:block}
+.sol .lbl{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:#14532d;display:block;margin-bottom:8px}
+.sol .res{background:#dcfce7;border-radius:4px;padding:8px 12px;margin:8px 0;font-weight:600;color:#14532d}
+.calc{display:block;font-family:"SF Mono",Consolas,monospace;font-size:13.5px;background:#fff;border:1px solid #d1fae5;border-radius:4px;padding:10px 12px;margin:6px 0;color:#166534;white-space:pre-wrap;line-height:1.6}
+.note{background:#eff6ff;border-left:2px solid #3b82f6;padding:10px 14px;margin:12px 0;font-size:13.5px;color:#1e3a8a;border-radius:2px}
+.warn{background:#fffbeb;border-left:2px solid #f59e0b;padding:10px 14px;margin:12px 0;font-size:13.5px;color:#78350f;border-radius:2px}
+table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13.5px;border:1px solid #e5e5e5;background:#fff}
+th{background:#f5f5f5;text-align:left;padding:10px 12px;font-weight:600;font-size:11.5px;text-transform:uppercase;letter-spacing:.05em;border-bottom:1px solid #e5e5e5}
+td{padding:10px 12px;border-bottom:1px solid #f0f0f0;vertical-align:top;color:#333}
+tr:last-child td{border-bottom:none}
+.pe-calc{background:#fff;border:1px solid #e5e5e5;border-radius:6px;padding:18px 20px;margin:16px 0}
+.pe-calc label{display:block;font-size:12.5px;color:#555;margin:8px 0 2px;font-weight:600}
+.pe-calc input{width:100%;padding:8px 10px;border:1px solid #d1d5db;border-radius:4px;font-size:15px;font-family:inherit}
+.pe-calc .out{margin-top:14px;padding:12px;background:#f0f9f4;border-radius:4px;font-weight:600;color:#14532d;font-size:14.5px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+footer{margin-top:60px;padding-top:20px;border-top:1px solid #e5e5e5;color:#888;font-size:12.5px;text-align:center}
+@media(max-width:640px){body{font-size:15px}.container{padding:80px 18px 60px}.nav-inner{padding:0 16px;gap:10px}.nav-links{gap:10px;font-size:11.5px}h1{font-size:22px}h2{font-size:18px;margin-top:40px}table{font-size:12.5px}.grid2{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="nav-title">2º Parcial · práctica</div>
+    <div class="nav-links">
+      <a href="index.html">← Resumen</a>
+      <a href="u4.html">U4 PE</a>
+      <a href="u5.html">U5</a>
+      <a href="u6.html">U6</a>
+      <a href="formulas.html">Casos</a>
+      <a href="parciales.html">Simulados</a>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+
+<h1>2º Parcial — práctica resuelta</h1>
+<p class="subtitle">Administración de Empresas I · UCES · Modelo de 2º parcial de la cátedra (prueba 2023). Cada ejercicio tiene su resolución paso a paso: intentá hacerlo primero y después tocá <strong>"Mostrar solución"</strong>.</p>
+
+<div class="real-box">
+<div class="meta">📋 Qué entra</div>
+<p>Este modelo combina lo que entra en el 2º parcial: <strong>Punto de Equilibrio</strong> (ejercicios 1 a 4 y definiciones del 8), <strong>Producción</strong> (localización, ejercicio 5) y <strong>Función de Recursos Humanos / Personal</strong> (ejercicios 6 y 7).</p>
+</div>
+
+<h3>El gráfico que tenés que tener en la cabeza</h3>
+<img class="fig" src="img/u4/u4_grafico_pe.png" alt="Gráfico del Punto de Equilibrio: IT = CT, área de déficit y área de beneficios">
+<p class="fig-cap">Punto de Equilibrio: donde Ingreso Total (IT) = Costo Total (CT). Debajo de esa cantidad hay déficit; por encima, beneficios.</p>
+
+<div class="note"><strong>Fórmulas base.</strong> Equilibrio en unidades: <strong>Q<sub>e</sub> = CF ÷ (P − CVu)</strong>. Equilibrio en valores: <strong>$<sub>e</sub> = Q<sub>e</sub> × P</strong> (o <strong>CF ÷ (1 − CVu/P)</strong>). Margen de contribución unitario: <strong>mc = P − CVu</strong>.<br>P = precio · CVu = costo variable unitario · CF = costos fijos.</p></div>
+
+
+<h2>Ejercicio 1 — Hotel <span style="font-size:13px;color:#888">(Punto de Equilibrio)</span></h2>
+<div class="q-box">
+<strong>1.</strong> Un hotel tiene ingresos por ventas promedio mensual de <strong>$550.000</strong> alquilando en promedio <strong>100 habitaciones</strong>. Costos fijos: sueldos $95.000 + agua y luz $10.400. Costo variable por habitación: $600.<span class="pts">15 pts</span>
+<ul>
+<li>a) Punto de equilibrio en unidades y valores.</li>
+<li>b) Por la crisis bajan las ventas: encontrar el precio de equilibrio para 50 habitaciones.</li>
+<li>c) Con ese precio, si los CF suben $20.000 y el CV por habitación sube 20%, ¿cuál es la nueva cantidad de equilibrio?</li>
+</ul>
+</div>
+<button class="btn" onclick="tog(this)">Mostrar solución</button>
+<div class="sol">
+<span class="lbl">✓ Resolución</span>
+<p><strong>Datos previos:</strong></p>
+<span class="calc">Precio por habitación  P  = 550.000 ÷ 100 = $5.500
+Costos fijos          CF = 95.000 + 10.400 = $105.400
+Costo variable unit.  CVu = $600</span>
+<p><strong>a) PE en unidades y valores</strong></p>
+<span class="calc">Qe = CF ÷ (P − CVu) = 105.400 ÷ (5.500 − 600)
+   = 105.400 ÷ 4.900 = 21,51 habitaciones
+$e = 21,51 × 5.500 = $118.306</span>
+<div class="res">PE ≈ 21,51 habitaciones · ≈ $118.306</div>
+<p><strong>b) Precio de equilibrio para Q = 50</strong> (en equilibrio: IT = CT → P·Q = CF + CVu·Q)</p>
+<span class="calc">P × 50 = 105.400 + 600 × 50 = 105.400 + 30.000 = 135.400
+P = 135.400 ÷ 50 = $2.708</span>
+<div class="res">Precio de equilibrio = $2.708 por habitación</div>
+<p><strong>c) Nueva cantidad</strong> con P = $2.708, CF = 105.400 + 20.000 = 125.400 y CVu = 600 × 1,20 = 720</p>
+<span class="calc">Qe = 125.400 ÷ (2.708 − 720) = 125.400 ÷ 1.988 = 63,08 habitaciones</span>
+<div class="res">Nueva cantidad de equilibrio ≈ 63,08 habitaciones</div>
+</div>
+
+
+<h2>Ejercicio 2 — Reventa de jeans <span style="font-size:13px;color:#888">(Punto de Equilibrio)</span></h2>
+<div class="q-box">
+<strong>2.</strong> Emprendimiento de reventa de jeans. CV unitario $500. Viaje a Buenos Aires $13.500 por viaje (2 por mes). Le dedica 15 hs mensuales a $400 la hora. Otros insumos por venta (bolsas, envoltorios) $50 por unidad. Precio de venta $1.900.<span class="pts">15 pts</span>
+<ul>
+<li>a) Punto de equilibrio en unidades.</li>
+<li>b) ¿Cuál sería su costo variable máximo para una cantidad de 12 jeans al mes?</li>
+<li>c) Si deja su trabajo, dedica 40 hs mensuales y quiere una ganancia de $30.000, ¿cuántos jeans debe vender?</li>
+</ul>
+</div>
+<button class="btn" onclick="tog(this)">Mostrar solución</button>
+<div class="sol">
+<span class="lbl">✓ Resolución</span>
+<p><strong>Clasificamos costos:</strong></p>
+<span class="calc">Fijos (no dependen de cuánto venda):
+   Viajes  = 13.500 × 2 = 27.000
+   Tiempo  = 15 hs × 400 = 6.000     →  CF = $33.000
+Variables (por jean):
+   Mercadería 500 + insumos 50        →  CVu = $550
+Precio P = $1.900</span>
+<p><strong>a) PE en unidades</strong></p>
+<span class="calc">Qe = 33.000 ÷ (1.900 − 550) = 33.000 ÷ 1.350 = 24,44 jeans</span>
+<div class="res">PE ≈ 24,44 → necesita vender 25 jeans para no perder</div>
+<p><strong>b) CV máximo para 12 jeans</strong> (que 12 sea el equilibrio: P − CVu = CF/Q)</p>
+<span class="calc">CVu_máx = P − CF ÷ Q = 1.900 − 33.000 ÷ 12
+        = 1.900 − 2.750 = −$850</span>
+<div class="warn"><strong>Da negativo</strong> → con estos costos fijos es <strong>imposible</strong> equilibrar vendiendo solo 12 jeans, porque 12 está por debajo del PE (24,4). Ni regalando la mercadería (CVu = 0) llega: a $0 de costo variable haría falta CF/P = 33.000/1.900 ≈ 18 jeans. Conclusión: 12 unidades no alcanzan el equilibrio.</div>
+<p><strong>c) Jeans para ganar $30.000</strong> (ahora 40 hs: tiempo = 40 × 400 = 16.000 → CF = 27.000 + 16.000 = 43.000)</p>
+<span class="calc">Q = (CF + ganancia) ÷ (P − CVu)
+  = (43.000 + 30.000) ÷ 1.350
+  = 73.000 ÷ 1.350 = 54,07 jeans</span>
+<div class="res">Debe vender ≈ 55 jeans para ganar $30.000</div>
+</div>
+
+
+<h2>Ejercicio 3 — Fabricar vs. importar <span style="font-size:13px;color:#888">(Punto de Equilibrio)</span></h2>
+<div class="q-box">
+<strong>3.</strong> Aguas saborizadas. <strong>Fabricar:</strong> CF anual $150.000, precio de mercado $85 por botella, costo de producir $18 por botella. <strong>Importar:</strong> gastos variables de importación/almacenamiento/distribución $190.000 por contenedor de 10.000 botellas, + derechos exclusivos $100.000 anuales (fijos). Precio $85.<span class="pts">15 pts</span>
+<ul>
+<li>a) PE fabricando y PE importando. Comparar y aconsejar.</li>
+<li>b) ¿Cuál sería el CF máximo de la opción menos conveniente para que ambas sean iguales?</li>
+</ul>
+</div>
+<button class="btn" onclick="tog(this)">Mostrar solución</button>
+<div class="sol">
+<span class="lbl">✓ Resolución</span>
+<p><strong>a) Punto de equilibrio de cada opción</strong></p>
+<span class="calc">FABRICAR:  CF = 150.000 · P = 85 · CVu = 18
+  Qe = 150.000 ÷ (85 − 18) = 150.000 ÷ 67 = 2.239 botellas
+
+IMPORTAR:  CVu = 190.000 ÷ 10.000 = $19 por botella
+           CF = 100.000 (derechos exclusivos)
+  Qe = 100.000 ÷ (85 − 19) = 100.000 ÷ 66 = 1.516 botellas</span>
+<div class="res">Conviene IMPORTAR: equilibra con 1.516 botellas vs. 2.239 fabricando (menos riesgo, llega antes a ganancias).</div>
+<p><strong>b) CF máximo de Fabricar (la menos conveniente) para igualar el PE de Importar</strong></p>
+<span class="calc">Que Qe(fabricar) = Qe(importar) = 1.516:
+CF_fab = Qe × (P − CVu) = 1.515,15 × 67 = $101.515</span>
+<div class="res">CF máximo de fabricar ≈ $101.515 para empatar con importar</div>
+</div>
+
+
+<h2>Ejercicio 4 — Fábrica de carteras <span style="font-size:13px;color:#888">(Punto de Equilibrio)</span></h2>
+<div class="q-box">
+<strong>4.</strong> Vende en promedio 9.000 carteras/mes por $18.000.000. Costos mensuales: sueldos $108.500, insumos de producción $180.000, alquiler oficinas $15.000, comisión por ventas $150.500, tasa de alumbrado y barrido $15.000, publicidad fija $60.000.<span class="pts">15 pts</span>
+<ul>
+<li>a) PE en cantidad y valores. ¿Está por arriba o por debajo del equilibrio?</li>
+<li>b) Cantidad para una utilidad de $120.000 mensuales.</li>
+<li>c) Precio necesario para una cantidad de 98 carteras, manteniendo costos.</li>
+</ul>
+</div>
+<button class="btn" onclick="tog(this)">Mostrar solución</button>
+<div class="sol">
+<span class="lbl">✓ Resolución</span>
+<p><strong>Clasificamos:</strong> los insumos y las comisiones dependen de las ventas (variables); el resto es fijo.</p>
+<span class="calc">P = 18.000.000 ÷ 9.000 = $2.000 por cartera
+CF = 108.500 + 15.000 + 15.000 + 60.000 = $198.500
+CV total = 180.000 + 150.500 = 330.500 (para 9.000 u)
+CVu = 330.500 ÷ 9.000 = $36,72 por cartera
+Margen de contribución = 2.000 − 36,72 = $1.963,28</span>
+<p><strong>a) PE cantidad y valores</strong></p>
+<span class="calc">Qe = 198.500 ÷ 1.963,28 = 101,1 carteras
+$e = 101,1 × 2.000 = $202.200</span>
+<div class="res">PE ≈ 101 carteras (≈ $202.200). Vende 9.000 → está MUY por ARRIBA del equilibrio (zona de beneficios).</div>
+<p><strong>b) Cantidad para utilidad de $120.000</strong></p>
+<span class="calc">Q = (198.500 + 120.000) ÷ 1.963,28 = 318.500 ÷ 1.963,28 = 162,2</span>
+<div class="res">≈ 163 carteras para ganar $120.000</div>
+<p><strong>c) Precio para Q = 98</strong> (que 98 sea el equilibrio)</p>
+<span class="calc">P = (CF + CVu × 98) ÷ 98 = (198.500 + 36,72 × 98) ÷ 98
+  = (198.500 + 3.599) ÷ 98 = 202.099 ÷ 98 = $2.062</span>
+<div class="res">Precio ≈ $2.062 por cartera</div>
+</div>
+
+
+<h2>Ejercicio 5 — Localización <span style="font-size:13px;color:#888">(Producción)</span></h2>
+<div class="q-box">
+<strong>5.</strong> Teniendo en cuenta los factores determinantes para la localización, mencionar al menos 3.<span class="pts">10 pts</span>
+</div>
+<button class="btn" onclick="tog(this)">Mostrar solución</button>
+<div class="sol">
+<span class="lbl">✓ Respuesta (apunte: Solana, La función Producción — 13.5.b Localización)</span>
+<p>La decisión de localización busca <strong>minimizar el flujo de la misma</strong> (costos de egreso a largo plazo). Los factores determinantes son, principalmente:</p>
+<ul>
+<li><strong>Disponibilidad de materia prima.</strong></li>
+<li><strong>Disponibilidad de energía.</strong></li>
+<li><strong>Posibilidad de contar con los recursos humanos necesarios.</strong></li>
+<li><strong>Cercanía del mercado consumidor.</strong></li>
+<li><strong>Leyes de promoción industrial.</strong></li>
+</ul>
+<div class="note">La localización es una de las decisiones de la etapa de <strong>PLANTA</strong> dentro de la estrategia de producción (junto con capacidad, dimensión e integración vertical).</div>
+<img class="fig" src="img/u5/u5_estrategia_produccion.png" alt="Esquema de la estrategia de producción: Producto, Proceso y Planta (con Localización)">
+<p class="fig-cap">La Localización aparece en la etapa de PLANTA de la estrategia de producción.</p>
+</div>
+
+
+<h2>Ejercicio 6 — Descriptivo de puesto <span style="font-size:13px;color:#888">(RRHH)</span></h2>
+<div class="q-box">
+<strong>6.</strong> Teniendo en cuenta la Función de Recursos Humanos, determinar las partes y componentes de un <strong>descriptivo de puesto de trabajo</strong>.<span class="pts">10 pts</span>
+</div>
+<button class="btn" onclick="tog(this)">Mostrar solución</button>
+<div class="sol">
+<span class="lbl">✓ Respuesta (apunte: Solana, La función Personal — 15.2 Análisis de puestos)</span>
+<p>El <strong>análisis de puestos</strong> define los objetivos, funciones, atribuciones y condiciones de cada puesto. La <strong>descripción del puesto</strong> generalmente comprende:</p>
+<ul>
+<li><strong>Identificación:</strong> título del cargo.</li>
+<li><strong>Nivel jerárquico.</strong></li>
+<li><strong>Funciones:</strong> actividades asignadas u operaciones que realiza.</li>
+<li><strong>Relaciones:</strong> dependencia (de quién depende), autoridad (a quiénes supervisa) y vinculaciones con otros puestos.</li>
+<li><strong>Misión o responsabilidad principal.</strong></li>
+<li><strong>Condiciones de trabajo:</strong> esfuerzo físico, ruido, stress, peligro, etc.</li>
+<li><strong>Horario de trabajo.</strong></li>
+</ul>
+<div class="note">Distinto es la <strong>especificación del puesto</strong>, que detalla lo que necesita la persona: educación, experiencia, conocimientos y personalidad / condiciones humanas necesarias.</div>
+</div>
+
+
+<h2>Ejercicio 7 — Definiciones de RRHH <span style="font-size:13px;color:#888">(RRHH)</span></h2>
+<div class="q-box">
+<strong>7.</strong> Determinar a qué conceptos de la Función de Recursos Humanos corresponden estas definiciones.<span class="pts">10 pts</span>
+</div>
+<table>
+<tr><th>Definición</th><th>Concepto</th></tr>
+<tr><td>Define el planeamiento de la estructura organizacional futura y su evolución, la definición de los RH requeridos y la comparación del RH previsto vs. el actualmente disponible.</td><td>?</td></tr>
+<tr><td>Su propósito es el mejoramiento de las aptitudes de los empleados para el desempeño de su profesión u oficio.</td><td>?</td></tr>
+<tr><td>Actividad que tiene por objeto calificar al empleado en función de la eficiencia y la eficacia con que realiza sus funciones.</td><td>?</td></tr>
+</table>
+<button class="btn" onclick="tog(this)">Mostrar solución</button>
+<div class="sol">
+<span class="lbl">✓ Respuestas</span>
+<table>
+<tr><th>Definición</th><th>Concepto</th></tr>
+<tr><td>Planeamiento de la estructura futura, RH requeridos, previsto vs. disponible.</td><td><strong>Planeamiento de los Recursos Humanos</strong></td></tr>
+<tr><td>Mejoramiento de las aptitudes para el desempeño de su profesión u oficio.</td><td><strong>Capacitación</strong> (y desarrollo)</td></tr>
+<tr><td>Calificar al empleado según la eficiencia y eficacia con que realiza sus funciones.</td><td><strong>Evaluación del desempeño</strong></td></tr>
+</table>
+</div>
+
+
+<h2>Ejercicio 8 — Definiciones de Punto de Equilibrio <span style="font-size:13px;color:#888">(PE)</span></h2>
+<div class="q-box">
+<strong>8.</strong> Determinar a qué conceptos corresponden estas definiciones.<span class="pts">10 pts</span>
+</div>
+<table>
+<tr><th>Definición</th><th>Concepto</th></tr>
+<tr><td>Por debajo de esta cantidad estamos en área de déficit y por encima en área de beneficios.</td><td>?</td></tr>
+<tr><td>Diferencia entre los ingresos por ventas y los costos totales (fijos y variables).</td><td>?</td></tr>
+<tr><td>Cómo contribuyen los precios de los productos/servicios a cubrir los costos y generar utilidad.</td><td>?</td></tr>
+</table>
+<button class="btn" onclick="tog(this)">Mostrar solución</button>
+<div class="sol">
+<span class="lbl">✓ Respuestas</span>
+<table>
+<tr><th>Definición</th><th>Concepto</th></tr>
+<tr><td>Debajo = déficit, encima = beneficios.</td><td><strong>Punto de Equilibrio</strong> (cantidad de equilibrio)</td></tr>
+<tr><td>Ingresos por ventas − costos totales.</td><td><strong>Utilidad</strong> / Beneficio (resultado)</td></tr>
+<tr><td>Cómo el precio cubre costos y genera utilidad.</td><td><strong>Margen de contribución</strong> (contribución marginal)</td></tr>
+</table>
+</div>
+
+
+<h2>🧮 Calculadora de Punto de Equilibrio</h2>
+<p style="font-size:14px;color:#666">Practicá con tus propios números. Cargá precio, costo variable unitario y costos fijos.</p>
+<div class="pe-calc">
+<div class="grid2">
+<div><label for="p">Precio (P)</label><input id="p" type="number" value="5500" oninput="calcPE()"></div>
+<div><label for="cvu">Costo variable unitario (CVu)</label><input id="cvu" type="number" value="600" oninput="calcPE()"></div>
+</div>
+<div class="grid2">
+<div><label for="cf">Costos fijos (CF)</label><input id="cf" type="number" value="105400" oninput="calcPE()"></div>
+<div><label for="g">Ganancia deseada (opcional)</label><input id="g" type="number" value="0" oninput="calcPE()"></div>
+</div>
+<div class="out" id="peout"></div>
+</div>
+
+<footer>
+2º Parcial (práctica) · Administración de Empresas I · UCES · Lic. Marketing<br>
+Resoluciones según apunte de cátedra (Solana). Verificá siempre el criterio de tu profe en el parcial.
+</footer>
+
+</div>
+
+<script>
+function tog(btn){
+  var s = btn.nextElementSibling;
+  var open = s.classList.toggle('open');
+  btn.textContent = open ? 'Ocultar solución' : 'Mostrar solución';
+}
+function fmt(n){return n.toLocaleString('es-AR',{maximumFractionDigits:2});}
+function calcPE(){
+  var P=+document.getElementById('p').value, CVu=+document.getElementById('cvu').value,
+      CF=+document.getElementById('cf').value, G=+document.getElementById('g').value||0;
+  var mc=P-CVu, out=document.getElementById('peout');
+  if(mc<=0){out.innerHTML='⚠ El precio debe ser mayor al costo variable unitario (margen de contribución positivo).';return;}
+  var Qe=(CF+G)/mc, $e=Qe*P;
+  out.innerHTML='Margen de contribución unitario: <strong>$'+fmt(mc)+'</strong><br>'+
+    'Cantidad de equilibrio'+(G>0?' (con ganancia)':'')+': <strong>'+fmt(Qe)+' unidades</strong><br>'+
+    'En valores: <strong>$'+fmt($e)+'</strong>';
+}
+calcPE();
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => { navigator.serviceWorker.register('sw.js').catch(() => {}); });
+}
+</script>
+
+</body>
+</html>
